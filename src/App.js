@@ -19,7 +19,7 @@ class App extends Component {
       email: email.value,
       password: password.value
     }
-
+    console.log(newUser)
     try {
       await axios.post(`${API_URL}/signup`, newUser)
     }
