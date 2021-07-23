@@ -44,7 +44,7 @@ class App extends Component {
     }
   
     console.log(newUser)
-    axios.post(`${API_URL}/api/google/info`, newUser , {withCredentials: true})
+    axios.post(`${API_URL}/google/info`, newUser , {withCredentials: true})
       .then((response) => {
         this.setState({
           loggedInUser: response.data.data,
