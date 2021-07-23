@@ -24,7 +24,7 @@ class App extends Component {
       await axios.post(`${API_URL}/signup`, newUser)
     }
     catch (err) {
-      console.log('Signup failed', err)
+      console.log('Appjs Signup failed', err)
     }
 
   }
