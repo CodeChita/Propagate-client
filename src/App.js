@@ -1,5 +1,5 @@
-import { Switch, Route, withRouter } from "react-router-dom";
-import React, { Component } from 'react'
+import {Switch, Route, withRouter} from "react-router-dom";
+import React, {Component} from 'react'
 import axios from 'axios'
 import {API_URL} from './config'
 import SignUp from "./components/Signup";
@@ -55,6 +55,9 @@ class App extends Component {
         });
       })
   }
+  handleGoogleFailure = () =>{
+    console.log('failed google auth')
+  }
   render(){
     return(
       <div>
@@ -62,7 +65,7 @@ class App extends Component {
           <Route path={"/signup"} render={(routeProps) =>{
             return <div>
               <SignUp onSignUp={this.handleSignUp} {...routeProps}/>
-              <GoogleButton/>
+              <GoogleButton onSuccess={this.handleGoogleSuccess} onFailure={this.handleGoogleFailure}/>
             </div>
           }}
           />
