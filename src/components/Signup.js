@@ -2,9 +2,10 @@ import React from 'react';
 
 function SignUp(props){
 
-    const {onSignUp} = props 
+    const {onSignUp, errorMessage} = props 
 
     return (
+        <div>
         <form onSubmit={onSignUp}>
             <div className="form-group">
                 <label htmlFor="InputUsername">Nickname</label>
@@ -21,6 +22,8 @@ function SignUp(props){
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
         </form>
+        {errorMessage ? <p>{errorMessage}</p> : null}
+        </div> 
     )
 }
 

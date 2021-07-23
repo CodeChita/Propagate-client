@@ -4,10 +4,12 @@ import axios from 'axios'
 import {API_URL} from './config'
 import SignUp from "./components/Signup";
 import GoogleButton from "./components/GoogleButton";
+import Navbar from "./components/Navbar";
 
 class App extends Component {
   state = {
-    user: null
+    user: null,
+    errorMessage: null
   }
   handleSignUp = async (event) => {
     console.log(event.target.username.value)
@@ -21,7 +23,11 @@ class App extends Component {
     }
     
     try {
-      await axios.post(`${API_URL}/signup`, newUser)
+      let response = await axios.post(`${API_URL}/signup`, newUser)
+      console.log(response)
+      if (response.data.errorMessage) {
+        this.setState({errorMessage: response.data.errorMessage})
+      }
     }
     catch (err) {
       console.log('Signup failed', err)
@@ -64,12 +70,13 @@ class App extends Component {
         <Switch>
           <Route path={"/signup"} render={(routeProps) =>{
             return <div>
-              <SignUp onSignUp={this.handleSignUp} {...routeProps}/>
+              <SignUp errorMessage={this.state.errorMessage} onSignUp={this.handleSignUp} {...routeProps}/>
               <GoogleButton onSuccess={this.handleGoogleSuccess} onFailure={this.handleGoogleFailure}/>
             </div>
           }}
           />
           </Switch>
+          <Navbar />
       </div>
     )
   }
