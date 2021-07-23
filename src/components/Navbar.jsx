@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {BottomNavigation, BottomNavigationAction} from '@material-ui/core';
-import {AccountCircleIcon, ForumIcon, MapIcon, SearchIcon} from '@material-ui/icons/';
+import {AccountCircleIcon, ForumIcon, MapIcon, SearchIcon, AddCircleOutlineIcon} from '@material-ui/icons/';
 
 
 
@@ -11,6 +11,7 @@ export default class Navbar extends Component {
             <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
                 <BottomNavigationAction label="Profile" value="profile" icon={<AccountCircleIcon />} />
                 <BottomNavigationAction label="Messages" value="messages" icon={<ForumIcon />} />
+                <BottomNavigationAction label="Add" value="add" icon={<AddCircleOutlineIcon />} />
                 <BottomNavigationAction label="Nearby" value="nearby" icon={<MapIcon />} />
                 <BottomNavigationAction label="Search" value="search" icon={<SearchIcon />} />
             </BottomNavigation>
