@@ -4,11 +4,13 @@ import axios from 'axios'
 import {API_URL} from './config'
 import SignUp from "./components/Signup";
 import GoogleButton from "./components/GoogleButton";
+import SignIn from "./components/SignIn"
 
 class App extends Component {
   state = {
     user: null
   }
+
   handleSignUp = async (event) => {
     console.log(event.target.username.value)
     event.preventDefault()
@@ -28,8 +30,28 @@ class App extends Component {
     }
 
   }
+  
+  handleSignIn = async (event) =>{
+    event.preventDefault()
+    const {email, password} = event.target
+    let log = {
+      email: email.value, 
+      password: password.value
+    }
+    try {
+      let user = await axios.post(`${API_URL}/signin`, log)
+      console.log(user)
+      if (user) {
+        //redirect to signin page 
+        this.props.history.push('/edit-profile')
+      }
+    }
+    catch (err) {
+      console.log('Signup failed', err)
+    }
+  }
 
-  handleGoogleSuccess= (data) => {
+  handleGoogleSuccess = (data) => {
     this.setState({
       showLoading: true
     })
@@ -62,6 +84,10 @@ class App extends Component {
     return(
       <div>
         <Switch>
+          <Route exact path={'/'} render={(routeProps) =>{
+          return <SignIn onSignIn={this.handleSignIn}{...routeProps}/>
+          }}
+          />
           <Route path={"/signup"} render={(routeProps) =>{
             return <div>
               <SignUp onSignUp={this.handleSignUp} {...routeProps}/>
