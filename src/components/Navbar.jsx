@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { AccountCircle, Forum, Add, Map, Search, EventBusyOutlined } from '@material-ui/icons';
-import { IconButton, Toolbar, AppBar, Fab} from '@material-ui/core';
+import { Forum, Add, Map, Search } from '@material-ui/icons';
+import { IconButton, Toolbar, AppBar, Fab, Avatar} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     text: {
@@ -42,20 +42,20 @@ export default function Navbar() {
             <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar>
           <IconButton edge="start" color="inherit">
-            <AccountCircle />
+            <Avatar alt="George Brooks" src='./broken-src.png'>GB</Avatar>
           </IconButton>
           <IconButton color="inherit">
-            <Forum />
+            <Forum fontSize="large"/>
           </IconButton>
           <Fab color="secondary" aria-label="add" className={classes.fabButton}>
             <Add />
           </Fab>
           <div className={classes.grow} />
           <IconButton color="inherit">
-            <Map />
+            <Map fontSize="large"/>
           </IconButton>
           <IconButton edge="end" color="inherit">
-            <Search/>
+            <Search fontSize="large"/>
           </IconButton>
         </Toolbar>
       </AppBar>

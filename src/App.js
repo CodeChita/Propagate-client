@@ -5,12 +5,23 @@ import {API_URL} from './config'
 import SignUp from "./components/Signup";
 import GoogleButton from "./components/GoogleButton";
 import Navbar from "./components/Navbar";
+import PrivateProfile from "./components/user/PrivateProfile";
+import PublicProfile from "./components/user/PublicProfile";
 
 class App extends Component {
+  
+  /////////////// STATE /////////////
   state = {
     user: null,
     errorMessage: null
   }
+
+  /////// LIFECYCLE METHODS //////////
+
+  componentDidMount() {}
+  
+
+  /////// SIGN UP, GOOGLE LOGIN, SIGN-IN, LOG OUT  ///////
   handleSignUp = async (event) => {
     console.log(event.target.username.value)
     event.preventDefault()
@@ -34,7 +45,6 @@ class App extends Component {
     }
 
   }
-
   handleGoogleSuccess= (data) => {
     this.setState({
       showLoading: true
@@ -64,6 +74,24 @@ class App extends Component {
   handleGoogleFailure = () =>{
     console.log('failed google auth')
   }
+  handleLogOut = async () => {
+    try {
+
+      await axios.post(`${API_URL}/logout`, {}, {withCredentials: true})
+      // clearing the user once they logout
+      this.setState({
+        user: null
+      } , () => {
+        this.props.history.push('/')
+      })
+
+    }
+    catch(err) {
+      console.log('Logout failed', err)
+    }
+  }
+
+  /////////////////// RENDER ///////////////////
   render(){
     return(
       <div>
@@ -73,10 +101,15 @@ class App extends Component {
               <SignUp errorMessage={this.state.errorMessage} onSignUp={this.handleSignUp} {...routeProps}/>
               <GoogleButton onSuccess={this.handleGoogleSuccess} onFailure={this.handleGoogleFailure}/>
             </div>
-          }}
-          />
+          }} />
+          <Route path={'/user/profile'} render={(routeProps) => {
+                return <PrivateProfile user={this.state.user} onLogOut={this.handleLogOut} {...routeProps} />
+          }} />
+          <Route path={'/user/profile'} render={(routeProps) => {
+                return <PrivateProfile user={this.state.user} onLogOut={this.handleLogOut} {...routeProps} />
+          }} />
           </Switch>
-          <Navbar />
+          <Navbar/>
       </div>
     )
   }

@@ -1,19 +1,45 @@
-import { IconButton, Typography } from '@material-ui/core'
-import { Edit, ToggleOn } from '@material-ui/icons'
-import React from 'react'
+import { IconButton, Switch, Typography } from '@material-ui/core'
+import { Edit } from '@material-ui/icons'
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
-function MyPlantOffer(props) {
 
-    const plantId
+export default class MyPlantOffer extends Component{
+         
+    constructor(props) {
+        super(props);
+        this.state = { 
+            plant: this.props.plant,
+            available: this.props.plant.available }
+    }
+   
+    handleChange = (event) => {
+        this.setState({available: event.target.checked})
+    }
     
-    return (
-        <div>
-            <img src={plant.plantImageUrl} alt={plant.displayName} />
-            <Typography variant="h3">{plant.displayName}</Typography>
-            <Link to={`/user/plant/${}/edit`}><IconButton><Edit/></IconButton></Link>
-            
-        </div>
-    )
-}
+    
+    render() {
+        const { _id, displayName, scientificName, plantImageUrl } = this.state.plant      
 
-export default MyPlantOffer
+        return (
+        <div style={{border: '#BBB 1px solid', marginBottom : '10px'}}>
+            <div style={{    
+                    display : 'flex', 
+                    flexDirection : 'row', 
+                    alignContent: 'center', 
+                    justifyContent : 'space-between'
+                    }}>
+
+            <img src={plantImageUrl} alt={scientificName}
+                 style={{height: '100px', width : '100px' }} />
+            <Typography variant="h4">{displayName}</Typography>
+
+            <div style={{height : 'auto', display : 'flex', flexDirection : 'column', justifyContent : 'space-between'}}>
+            <Link to={`/user/plant/${_id}/edit`}><IconButton><Edit/></IconButton></Link>
+            <Switch checked={this.state.available} color="secondary" onChange={this.handleChange} name={scientificName} />
+            </div>
+            </div>
+        </div>
+        )
+    }
+}
