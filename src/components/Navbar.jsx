@@ -2,6 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { Forum, Add, Map, Search } from '@material-ui/icons';
 import { IconButton, Toolbar, AppBar, Fab, Avatar} from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     text: {
@@ -42,7 +43,7 @@ export default function Navbar() {
             <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar>
           <IconButton edge="start" color="inherit">
-            <Avatar alt="George Brooks" src='./broken-src.png'>GB</Avatar>
+            <Link to={'/user/profile'}><Avatar alt="George Brooks" src='./broken-src.png'>GB</Avatar></Link>
           </IconButton>
           <IconButton color="inherit">
             <Forum fontSize="large"/>

@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import PrivateProfile from "./components/user/PrivateProfile";
 import PublicProfile from "./components/user/PublicProfile";
 import ImageUpload from "./components/ImageUpload";
+import SignIn from "./components/SignIn";
 
 class App extends Component {
   
@@ -75,6 +76,37 @@ class App extends Component {
   handleGoogleFailure = () =>{
     console.log('failed google auth')
   }
+
+  handleSignIn = async (event) => {
+    event.preventDefault()
+    console.log('Sign in works!!!! Yippeeee')
+     const { email, password} = event.target
+
+     let myUser = {
+       email: email.value,
+       password: password.value
+     }
+ 
+     // make a POST signin request to the server
+     try {
+       let response = await axios.post(`${API_URL}/signin`, myUser, {withCredentials: true})
+       this.setState({
+         user: response.data
+       }, () => {
+         console.log(this.state.user)
+          this.props.history.push('/')
+       })
+       
+     }
+     catch(err) {
+       console.log('Signup failed', err.response.data)
+       // axios vides us the server response in `response.data`
+       // we put `.error` because our server gives us an object with an `error` key  
+       this.setState({
+          myError:  err.response.data.error
+       })
+     }
+  }
   handleLogOut = async () => {
     try {
 
@@ -103,6 +135,9 @@ class App extends Component {
               <GoogleButton onSuccess={this.handleGoogleSuccess} onFailure={this.handleGoogleFailure}/>
             </div>
           }} />
+          <Route exact path={"/signin"} render={(routeProps) => {
+                return  <SignIn  error={this.state.myError} onSignIn={this.handleSignIn} {...routeProps}  />
+              }}/>
           <Route path={'/user/profile'} render={(routeProps) => {
                 return <PrivateProfile user={this.state.user} onLogOut={this.handleLogOut} {...routeProps} />
           }} />
