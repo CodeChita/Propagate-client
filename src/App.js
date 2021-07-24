@@ -7,6 +7,7 @@ import GoogleButton from "./components/GoogleButton";
 import Navbar from "./components/Navbar";
 import PrivateProfile from "./components/user/PrivateProfile";
 import PublicProfile from "./components/user/PublicProfile";
+import ImageUpload from "./components/ImageUpload";
 
 class App extends Component {
   
@@ -105,8 +106,8 @@ class App extends Component {
           <Route path={'/user/profile'} render={(routeProps) => {
                 return <PrivateProfile user={this.state.user} onLogOut={this.handleLogOut} {...routeProps} />
           }} />
-          <Route path={'/user/profile'} render={(routeProps) => {
-                return <PrivateProfile user={this.state.user} onLogOut={this.handleLogOut} {...routeProps} />
+          <Route path={'/image-upload'} render={(routeProps) => {
+                return <ImageUpload {...routeProps} />
           }} />
           </Switch>
           <Navbar/>

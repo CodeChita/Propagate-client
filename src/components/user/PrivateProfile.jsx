@@ -22,11 +22,7 @@ handleAvailable = (event) => {
             <Avatar alt="GB" src="./broken.png" />
             <a href="#">edit profile</a>
             </div>
-            
-                    <MyPlantOffer onAvailable={this.handleAvailability} plant={{_id: 69, displayName: 'dave', available: true, scientificName: 'David L. Smith', commonName: ['dave', 'davidus', 'daveyBoi'], location: 'Oregon', plantImageUrl: '/images/temporary/ficus.png'}}/>
-                    <MyPlantOffer onAvailable={this.handleAvailability} plant={{_id: 70, displayName: 'danny', available: false, scientificName: 'Daniel P. Jones', commonName: ['dan', 'danny', 'danno'], location: 'Ohio', plantImageUrl: '/images/temporary/hibiscus.png'}}/>
-                    <MyPlantOffer onAvailable={this.handleAvailability} plant={{_id: 71, displayName: 'ben', available: true, scientificName: 'Benjamin T. Button', commonName: ['ben', 'benny', 'bibi'], location: 'Arizona', plantImageUrl: '/images/temporary/monstera.png'}}/>
-            </div>
+             </div>
         )
     }
 }

@@ -2,6 +2,8 @@ import { IconButton, Switch, Typography } from '@material-ui/core'
 import { Edit } from '@material-ui/icons'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { API_URL } from '../../config'
+import axios from 'axios'
 
 
 export default class MyPlantOffer extends Component{
@@ -13,8 +15,14 @@ export default class MyPlantOffer extends Component{
             available: this.props.plant.available }
     }
    
-    handleChange = (event) => {
-        this.setState({available: event.target.checked})
+    handleChange = async (event) =>  {
+        
+        await this.setState({available: event.target.checked})
+        const newPlant = await this.state.plant
+        delete newPlant._id
+        newPlant.available = this.state.available
+        let response = await axios.patch(`${API_URL}/user/plant/${this.state.plant._id}`, newPlant)
+        console.log(response)
     }
     
     
