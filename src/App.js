@@ -47,7 +47,28 @@ class App extends Component {
     }
 
   }
-  handleGoogleSuccess= (data) => {
+  
+  handleSignIn = async (event) =>{
+    event.preventDefault()
+    const {email, password} = event.target
+    let log = {
+      email: email.value, 
+      password: password.value
+    }
+    try {
+      let user = await axios.post(`${API_URL}/signin`, log)
+      console.log(user)
+      if (user) {
+        //redirect to signin page 
+        this.props.history.push('/edit-profile')
+      }
+    }
+    catch (err) {
+      console.log('Signup failed', err)
+    }
+  }
+
+  handleGoogleSuccess = (data) => {
     this.setState({
       showLoading: true
     })
@@ -129,6 +150,10 @@ class App extends Component {
     return(
       <div>
         <Switch>
+          <Route exact path={'/'} render={(routeProps) =>{
+          return <SignIn onSignIn={this.handleSignIn}{...routeProps}/>
+          }}
+          />
           <Route path={"/signup"} render={(routeProps) =>{
             return <div>
               <SignUp errorMessage={this.state.errorMessage} onSignUp={this.handleSignUp} {...routeProps}/>
