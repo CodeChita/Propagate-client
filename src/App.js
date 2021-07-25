@@ -1,4 +1,4 @@
-import {Switch, Route, withRouter, Link} from "react-router-dom";
+import {Switch, Route, withRouter, Link, Redirect} from "react-router-dom";
 import React, {Component} from 'react'
 import axios from 'axios'
 import {API_URL} from './config'
@@ -77,7 +77,7 @@ class App extends Component {
       let user = await axios.post(`${API_URL}/signin`, log)
       console.log(user)
       if (user) {
-        this.props.history.push('/user/edit-profile')
+        <Redirect to='/user/profile' />
       }
     }
     catch (err) {
@@ -103,11 +103,11 @@ class App extends Component {
     axios.post(`${API_URL}/google/info`, newUser , {withCredentials: true})
       .then((response) => {
         this.setState({
-          loggedInUser: response.data.data,
+          user: response.data.data,
           error: null,
           showLoading: false
         }, () => {
-          // this.props.history.push('/profile')
+          this.props.history.push('/user/profile')
         });
       })
   }
@@ -171,6 +171,7 @@ class App extends Component {
     return(
       <div>
       <div style={{border: '1px solid pink'}}>{this.state.user ? `Logged in User: ${this.state.user.email}` : 'no user logged in'}</div>
+        <img src="/images/propagate-med.svg" alt="propagate app" />
         <Switch>
           <Route exact path={'/'} render={(routeProps) =>{
           return <div>

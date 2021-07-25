@@ -1,23 +1,28 @@
-import { Avatar, IconButton } from '@material-ui/core'
+import { Avatar, IconButton, CircularProgress} from '@material-ui/core'
 import { ExitToApp } from '@material-ui/icons'
 import React, { Component } from 'react'
 import MyPlantOffer from './MyPlantOffer'
 import axios from 'axios'
 import { API_URL } from '../../config'
 
+
 export default class PrivateProfile extends Component {
     
     componentDidMount = async () => {
-        let userData = await axios.get(`${API_URL}/user/profile`)
-        console.log(userData)
-        this.setState({user: userData})
+        let userData = await axios.get(`${API_URL}/user`)
+        console.log('PrivateProfile User data:', userData)
+        this.setState({
+            user: userData,
+            fetchingUser: false
+        })
     }
 
     state = {
-        user: null
+        user: null,
+        fetchingUser: true
     }
     render() {
-
+       
         return (
             <div>
             <IconButton onClick={this.props.onLogOut} style={{position: 'relative', float: 'right'}}><ExitToApp fontSize="large"/></IconButton> 
