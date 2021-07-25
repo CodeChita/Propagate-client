@@ -1,7 +1,6 @@
 import { Avatar } from '@material-ui/core'
 import { ExitToApp } from '@material-ui/icons'
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import MyPlantOffer from './MyPlantOffer'
 import axios from 'axios'
 import { API_URL } from '../../config'

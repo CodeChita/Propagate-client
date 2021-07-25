@@ -34,16 +34,18 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export default function Navbar() {
+export default function Navbar(props) {
     
           const classes= useStyles()
+          console.log('Navbar props:' , props)
+          const {user} = props
           return (
-           
+            
             <React.Fragment>
             <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar>
           <IconButton edge="start" color="inherit">
-            <Link to={'/user/profile'}><Avatar alt="George Brooks" src='./broken-src.png'>GB</Avatar></Link>
+            <Link to={'/user/profile'}><Avatar alt={user.username} src={user.profileImageUrl}></Avatar></Link>
           </IconButton>
           <IconButton color="inherit">
             <Forum fontSize="large"/>
@@ -52,6 +54,7 @@ export default function Navbar() {
             <Add />
           </Fab>
           <div className={classes.grow} />
+          <div>{user.email}</div>
           <IconButton color="inherit">
             <Map fontSize="large"/>
           </IconButton>

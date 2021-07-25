@@ -6,21 +6,34 @@ import SignUp from "./components/Signup";
 import GoogleButton from "./components/GoogleButton";
 import Navbar from "./components/Navbar";
 import PrivateProfile from "./components/user/PrivateProfile";
-import PublicProfile from "./components/user/PublicProfile";
 import ImageUpload from "./components/ImageUpload";
 import SignIn from "./components/SignIn";
+import EditProfile from "./components/user/EditProfile";
+import { CircularProgress } from "@material-ui/core";
 
 class App extends Component {
   
   /////////////// STATE /////////////
   state = {
     user: null,
-    errorMessage: null
+    errorMessage: null,
+    fetchingUser: true
   }
 
   /////// LIFECYCLE METHODS //////////
 
-  componentDidMount() {}
+   componentDidMount = async() => {
+
+    let userResponse = await axios.get(`${API_URL}/user`, {withCredentials: true})
+    console.log('App.js CDM get user', userResponse)
+    await this.setState({
+          user: userResponse.data,
+          fetchingUser: false,
+        })
+        
+
+    }  
+  
   
 
   /////// SIGN UP, GOOGLE LOGIN, SIGN-IN, LOG OUT  ///////
@@ -58,7 +71,7 @@ class App extends Component {
       let user = await axios.post(`${API_URL}/signin`, log)
       console.log(user)
       if (user) {
-        this.props.history.push('/edit-profile')
+        this.props.history.push('/user/edit-profile')
       }
     }
     catch (err) {
@@ -145,8 +158,13 @@ class App extends Component {
 
   /////////////////// RENDER ///////////////////
   render(){
+    if (this.state.fetchingUser) {
+      return <CircularProgress/>
+    }
+
     return(
       <div>
+      <div style={{border: '1px solid pink'}}>{this.state.user ? `Logged in User: ${this.state.user.email}` : 'no user logged in'}</div>
         <Switch>
           <Route exact path={'/'} render={(routeProps) =>{
           return <div>
@@ -168,11 +186,14 @@ class App extends Component {
           <Route path={'/user/profile'} render={(routeProps) => {
                 return <PrivateProfile user={this.state.user} onLogOut={this.handleLogOut} {...routeProps} />
           }} />
+          <Route path={'/user/edit-profile'} render={(routeProps) => {
+                return <EditProfile user={this.state.user} {...routeProps} />
+          }} />
           <Route path={'/image-upload'} render={(routeProps) => {
                 return <ImageUpload {...routeProps} />
           }} />
           </Switch>
-          <Navbar/>
+          <Navbar user={this.state.user}/>
       </div>
     )
   }
