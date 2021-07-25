@@ -9,10 +9,10 @@ import { API_URL } from '../../config'
 export default class PrivateProfile extends Component {
     
     componentDidMount = async () => {
-        let userData = await axios.get(`${API_URL}/user`)
-        console.log('PrivateProfile User data:', userData)
+        let response = await axios.get(`${API_URL}/user`, {withCredentials: true})
+        console.log('PrivateProfile User data:', response.data)
         this.setState({
-            user: userData,
+            user: response.data,
             fetchingUser: false
         })
     }

@@ -25,7 +25,7 @@ class App extends Component {
    componentDidMount = async() => {
      try{
     let userResponse = await axios.get(`${API_URL}/user`, {withCredentials: true})
-    console.log('App.js CDM get user', userResponse)
+    console.log('App.js CDM get user', userResponse.data)
      this.setState({
           user: userResponse.data,
           fetchingUser: false,
