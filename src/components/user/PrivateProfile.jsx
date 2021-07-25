@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import MyPlantOffer from './MyPlantOffer'
 import axios from 'axios'
 import { API_URL } from '../../config'
+import { Link } from 'react-router-dom'
 
 
 export default class PrivateProfile extends Component {
@@ -22,13 +23,15 @@ export default class PrivateProfile extends Component {
         fetchingUser: true
     }
     render() {
-       
+        if (this.state.fetchingUser) {
+            return <CircularProgress/>
+          }
         return (
             <div>
             <IconButton onClick={this.props.onLogOut} style={{position: 'relative', float: 'right'}}><ExitToApp fontSize="large"/></IconButton> 
             <div style={{margin: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <Avatar alt="GB" src="./broken.png" />
-            <a href="/user/edit-profile">edit profile</a>
+            <Link to="/user/edit-profile">edit profile</Link>
             </div>
             { 
                 !this.state.user ? 
