@@ -1,4 +1,4 @@
-import {Switch, Route, withRouter} from "react-router-dom";
+import {Switch, Route, withRouter, Link} from "react-router-dom";
 import React, {Component} from 'react'
 import axios from 'axios'
 import {API_URL} from './config'
@@ -28,7 +28,6 @@ class App extends Component {
     catch (err) {
       console.log('Signup failed', err)
     }
-
   }
   
   handleSignIn = async (event) =>{
@@ -42,7 +41,6 @@ class App extends Component {
       let user = await axios.post(`${API_URL}/signin`, log)
       console.log(user)
       if (user) {
-        //redirect to signin page 
         this.props.history.push('/edit-profile')
       }
     }
@@ -85,7 +83,11 @@ class App extends Component {
       <div>
         <Switch>
           <Route exact path={'/'} render={(routeProps) =>{
-          return <SignIn onSignIn={this.handleSignIn}{...routeProps}/>
+          return <div>
+          <SignIn onSignIn={this.handleSignIn}{...routeProps}/>
+          <GoogleButton onSuccess={this.handleGoogleSuccess} onFailure={this.handleGoogleFailure}/>
+          <Link to={`/signup`}>sign up?</Link>
+          </div>
           }}
           />
           <Route path={"/signup"} render={(routeProps) =>{
