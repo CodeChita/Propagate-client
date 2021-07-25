@@ -1,4 +1,4 @@
-import { Avatar } from '@material-ui/core'
+import { Avatar, IconButton } from '@material-ui/core'
 import { ExitToApp } from '@material-ui/icons'
 import React, { Component } from 'react'
 import MyPlantOffer from './MyPlantOffer'
@@ -20,16 +20,16 @@ export default class PrivateProfile extends Component {
 
         return (
             <div>
-            <ExitToApp fontSize="large" style={{position: 'relative', float: 'right'}}/>
+            <IconButton onClick={this.props.onLogOut} style={{position: 'relative', float: 'right'}}><ExitToApp fontSize="large"/></IconButton> 
             <div style={{margin: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <Avatar alt="GB" src="./broken.png" />
-            <a href="#">edit profile</a>
+            <a href="/user/edit-profile">edit profile</a>
             </div>
             { 
                 !this.state.user ? 
                 'You have no plants offered. Add some now!' : 
                 this.state.user.plantsOffered.map((plant) => {
-                <MyPlantOffer plant={plant} />
+                return <MyPlantOffer plant={plant} />
             })}
              </div>
         )

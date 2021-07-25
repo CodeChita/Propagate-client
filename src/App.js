@@ -23,17 +23,23 @@ class App extends Component {
   /////// LIFECYCLE METHODS //////////
 
    componentDidMount = async() => {
-
+     try{
     let userResponse = await axios.get(`${API_URL}/user`, {withCredentials: true})
     console.log('App.js CDM get user', userResponse)
-    await this.setState({
+     this.setState({
           user: userResponse.data,
           fetchingUser: false,
         })
-        
-
-    }  
+      }
+      catch(err) {
+        console.log('User fetch failed', err)
+        this.setState({
+          fetchingUser: false,
+        })
+      }  
+    }
   
+
   
 
   /////// SIGN UP, GOOGLE LOGIN, SIGN-IN, LOG OUT  ///////
@@ -187,13 +193,17 @@ class App extends Component {
                 return <PrivateProfile user={this.state.user} onLogOut={this.handleLogOut} {...routeProps} />
           }} />
           <Route path={'/user/edit-profile'} render={(routeProps) => {
-                return <EditProfile user={this.state.user} {...routeProps} />
+                return <EditProfile {...routeProps} />
           }} />
           <Route path={'/image-upload'} render={(routeProps) => {
                 return <ImageUpload {...routeProps} />
           }} />
           </Switch>
-          <Navbar user={this.state.user}/>
+          {
+            this.state.user ? 
+            <Navbar user={this.state.user} /> :
+            null
+          }
       </div>
     )
   }
