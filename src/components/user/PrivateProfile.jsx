@@ -36,8 +36,8 @@ export default class PrivateProfile extends Component {
             { 
                 !this.state.user ? 
                 'You have no plants offered. Add some now!' : 
-                this.state.user.plantsOffered.map((plant) => {
-                return <MyPlantOffer plant={plant} />
+                this.state.user.plantsOffered.map((plant, index) => {
+                return <MyPlantOffer key={index} plant={plant} />
             })}
              </div>
         )

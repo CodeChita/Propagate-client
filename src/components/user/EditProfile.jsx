@@ -35,18 +35,18 @@ export default class EditProfile extends Component {
                 return <CircularProgress/>
               }
             
-            let {profileImageUrl, nickname, about, firstName, lastName, email} = this.state.user
-            nickname = !nickname ?
+            let {profileImageUrl, username, about, firstName, lastName, email} = this.state.user
+            username = !username ?
                             firstName ? firstName : null :
-                            nickname
+                            username
 
         return (
             <>
             <h3> Edit Profile</h3>
-            <p>{`${nickname}, ${about}, ${firstName}, ${lastName}, ${email}`}</p>
-            <Avatar src={profileImageUrl} alt={nickname} style={{width: '30vw', height: '30vw', maxWidth: '150px'}} />
+            <p>{`${username}, ${about}, ${firstName}, ${lastName}, ${email}`}</p>
+            <Avatar src={profileImageUrl} alt={username} style={{width: '30vw', height: '30vw', maxWidth: '150px'}} />
             <form noValidate autoComplete="off">
-                <TextField id="nickname"  label="Nickname" defaultValue={nickname} margin="normal" variant="outlined" /><br/>
+                <TextField id="username"  label="username" defaultValue={username} margin="normal" variant="outlined" /><br/>
                 <TextField id="about" label="About Me" multiline rows={4} margin="normal" variant="outlined" /> <br/>
                 <TextField id="email" label="Email" defaultValue={email} margin="normal" variant="outlined" /> <br/>
                 

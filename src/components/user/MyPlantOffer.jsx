@@ -16,13 +16,20 @@ export default class MyPlantOffer extends Component{
     }
    
     handleChange = async (event) =>  {
-        
-        await this.setState({available: event.target.checked})
-        const newPlant = await this.state.plant
-        delete newPlant._id
-        newPlant.available = this.state.available
-        let response = await axios.patch(`${API_URL}/user/plant/${this.state.plant._id}`, newPlant)
-        console.log(response)
+        await this.setState( prevState => ({
+
+            plant: {
+                ...prevState.plant,
+                available: event.target.checked
+            },
+            available: event.target.checked
+
+        }))
+        console.log('state log before axios', this.state.plant)
+        let response = await axios.patch(`${API_URL}/user/plant/${this.state.plant._id}`, {plant: this.state.plant})
+        console.log('response', response.data)
+        await this.setState({plant: response.data})   
+        console.log('state after update from response', this.state.plant) 
     }
     
     
