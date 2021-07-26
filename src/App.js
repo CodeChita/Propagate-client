@@ -10,6 +10,8 @@ import GoogleButton from "./components/auth/GoogleButton";
 
 import PrivateProfile from "./components/user/PrivateProfile";
 import EditProfile from "./components/user/EditProfile";
+import AllChats from "./components/chat/AllChats";
+import ChatPage from "./components/chat";
 
 import Navbar from "./components/Navbar";
 import ImageUpload from "./components/ImageUpload";
@@ -172,6 +174,9 @@ class App extends Component {
           }}/>
           <Route path={'/user/profile'} render={(routeProps) => {
                 return <PrivateProfile user={this.state.user} onLogOut={this.handleLogOut} {...routeProps} />
+          }} />
+          <Route path={'/user/chat'} render={(routeProps) => {
+                return <AllChats me={this.state.user} {...routeProps} />
           }} />
           <Route path={'/user/edit-profile'} render={(routeProps) => {
                 return <EditProfile {...routeProps} />
