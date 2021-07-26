@@ -18,7 +18,8 @@ class App extends Component {
     user: null,
     plantImage: null,
     errorMessage: null,
-    fetchingUser: true
+    fetchingUser: true,
+    showLoading: null
   }
 
   /////// LIFECYCLE METHODS //////////
@@ -33,7 +34,6 @@ class App extends Component {
         })
       }
       catch(err) {
-        console.log('User fetch failed', err)
         this.setState({
           fetchingUser: false,
         })
@@ -43,7 +43,7 @@ class App extends Component {
 
   
 
-  /////// SIGN UP, GOOGLE LOGIN, SIGN-IN, LOG OUT  ///////
+  /////// SIGN UP, SIGN-IN, GOOGLE LOGIN, LOG OUT  ///////
   handleSignUp = async (event) => {
     console.log(event.target.username.value)
     event.preventDefault()
@@ -57,7 +57,6 @@ class App extends Component {
 
     try {
       let response = await axios.post(`${API_URL}/signup`, newUser)
-      console.log(response)
       if (response.data.errorMessage) {
         this.setState({errorMessage: response.data.errorMessage})
       }
@@ -66,50 +65,6 @@ class App extends Component {
       console.log('Appjs Signup failed', err)
     }
   }
-
-  handleGoogleSuccess = (data) => {
-    this.setState({
-      showLoading: true
-    })
-
-    const { givenName, familyName, email, imageUrl, googleId } = data.profileObj
-    let newUser = {
-      firstName: givenName,
-      lastName: familyName,
-      email,
-      image: imageUrl,
-      googleId
-    }
-
-    console.log(newUser)
-    axios.post(`${API_URL}/google/info`, newUser, { withCredentials: true })
-      .then((response) => {
-        this.setState({
-          user: response.data.data,
-          error: null,
-          showLoading: false
-        }, () => {
-          this.props.history.push('/user/profile')
-        });
-      })
-  }
-  handleGoogleFailure = () => {
-    console.log('failed google auth')
-  }
-
-  handleAddPlant = (event) => {
-    event.preventDefault()
-
-    // const { image } = event.target.files[0]
-    console.log(event.target.image.value)
-    // let picture = URL.createObjectURL(image);
-    // this.setState({
-    //   plantImage: picture
-    // })
-    // this.props.history.push('/showPicture')
-
-  }
-  
   handleSignIn = async (event) => {
     event.preventDefault()
      const { email, password} = event.target
@@ -125,18 +80,47 @@ class App extends Component {
        this.setState({
          user: response.data
        }, () => {
-          this.props.history.push('/')
+          this.props.history.push('/user/profile')
        })
        
      }
      catch(err) {
-       console.log('Signup failed', err.response.data)
-       // axios vides us the server response in `response.data`
-       // we put `.error` because our server gives us an object with an `error` key  
-       this.setState({
-          myError:  err.response.data.error
+       console.log('Signin failed', err.response.data)
+          this.setState({
+          errorMessage:  err.response.data.error
        })
      }
+  }
+  handleGoogleSuccess = (data) => {
+    this.setState({
+      showLoading: true
+    })
+
+    const { givenName, familyName, email, imageUrl, googleId } = data.profileObj
+    let newUser = {
+      firstName: givenName,
+      lastName: familyName,
+      username: `${givenName} ${familyName}`,
+      email,
+      profileImageUrl: imageUrl,
+      googleId
+    }
+
+    console.log(newUser)
+    axios.post(`${API_URL}/google/info`, newUser, { withCredentials: true })
+      .then((response) => {
+        console.log('GoogleSignUp:', response)
+        this.setState({
+          user: response.data.data,
+          errorMessage: null,
+          showLoading: false
+        }, () => {
+          this.props.history.push('/user/profile')
+        });
+      })
+  }
+  handleGoogleFailure = () => {
+    console.log('failed google auth')
   }
   handleLogOut = async () => {
     try {
@@ -166,14 +150,13 @@ class App extends Component {
       <div style={{border: '1px solid pink'}}>{this.state.user ? `Logged in User: ${this.state.user.email}` : 'no user logged in'}</div>
         <img src="/images/propagate-med.svg" alt="propagate app" />
         <Switch>
-          <Route exact path={'/'} render={(routeProps) => {
-            return (
-            <>
-              <SignIn onSignIn={this.handleSignIn}{...routeProps} />
-              <GoogleButton onSuccess={this.handleGoogleSuccess} onFailure={this.handleGoogleFailure} />
-              <Link to={`/signup`}>Wanna sign up?</Link>
-            </>
-            )}}
+          <Route exact path={'/'} render={(routeProps) =>{
+          return <div>
+          <SignIn errorMessage={this.state.errorMessage} onSignIn={this.handleSignIn}{...routeProps}/>
+          <GoogleButton onSuccess={this.handleGoogleSuccess} onFailure={this.handleGoogleFailure}/>
+          <Link to={`/signup`}>sign up?</Link>
+          </div>
+          }}
           />
           <Route path={"/signup"} render={(routeProps) => {
             return (
@@ -183,15 +166,8 @@ class App extends Component {
             </>
           )}} />
           <Route exact path={"/signin"} render={(routeProps) => {
-                return  <SignIn  error={this.state.myError} onSignIn={this.handleSignIn} {...routeProps}  />
-          }} />
-          <Route path={"/addplant"} render={(RouteProps) => {
-            return <ImageUpload/>
-          }} />
-          <Route path={'/showPicture'} render={(RouteProps) =>{
-            return <ShowPlant/>
-          }} />    
-          
+                return  <SignIn  errorMessage={this.state.errorMessage} onSignIn={this.handleSignIn} {...routeProps}  />
+              }}/>
           <Route path={'/user/profile'} render={(routeProps) => {
                 return <PrivateProfile user={this.state.user} onLogOut={this.handleLogOut} {...routeProps} />
           }} />

@@ -1,9 +1,10 @@
 import React from 'react'
 import GoogleLogin from 'react-google-login';
+import { GOOGLE_ID } from '../config';
 
 function GoogleButton(props) {
     const {onSuccess, onFailure} = props
-   const ID = "603085994788-smdtl36j1veesrhj9r33vufoa6f5a4n0.apps.googleusercontent.com"
+   const ID = GOOGLE_ID
     return (
         <div>
             <GoogleLogin

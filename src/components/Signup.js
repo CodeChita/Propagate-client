@@ -8,7 +8,7 @@ function SignUp(props){
         <div>
         <form onSubmit={onSignUp}>
             <div className="form-group">
-                <label htmlFor="InputUsername">Nickname</label>
+                <label htmlFor="InputUsername">username</label>
                 <input type="text" className="form-control" id="InputUsername" name="username" />
             </div>
             <div className="form-group">
