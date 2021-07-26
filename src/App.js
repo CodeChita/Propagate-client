@@ -10,6 +10,9 @@ import ImageUpload from "./components/ImageUpload";
 import SignIn from "./components/SignIn";
 import EditProfile from "./components/user/EditProfile";
 import { CircularProgress } from "@material-ui/core";
+import AddPlant from "./components/AddPlant";
+import ShowPlant from "./components/ShowPlant";
+import CapturePicture from "./components/CapturePicture";
 
 class App extends Component {
   
@@ -40,9 +43,6 @@ class App extends Component {
       }  
     }
   
-
-  
-
   /////// SIGN UP, SIGN-IN, GOOGLE LOGIN, LOG OUT  ///////
   handleSignUp = async (event) => {
     console.log(event.target.username.value)
@@ -151,13 +151,13 @@ class App extends Component {
         <img src="/images/propagate-med.svg" alt="propagate app" />
         <Switch>
           <Route exact path={'/'} render={(routeProps) =>{
-          return <div>
-          <SignIn errorMessage={this.state.errorMessage} onSignIn={this.handleSignIn}{...routeProps}/>
-          <GoogleButton onSuccess={this.handleGoogleSuccess} onFailure={this.handleGoogleFailure}/>
-          <Link to={`/signup`}>sign up?</Link>
-          </div>
-          }}
-          />
+            return(
+          <>
+            <SignIn errorMessage={this.state.errorMessage} onSignIn={this.handleSignIn}{...routeProps}/>
+            <GoogleButton onSuccess={this.handleGoogleSuccess} onFailure={this.handleGoogleFailure}/>
+            <Link to={`/signup`}>sign up?</Link>
+          </>
+          )}} />
           <Route path={"/signup"} render={(routeProps) => {
             return (
             <>
@@ -167,7 +167,7 @@ class App extends Component {
           )}} />
           <Route exact path={"/signin"} render={(routeProps) => {
                 return  <SignIn  errorMessage={this.state.errorMessage} onSignIn={this.handleSignIn} {...routeProps}  />
-              }}/>
+          }}/>
           <Route path={'/user/profile'} render={(routeProps) => {
                 return <PrivateProfile user={this.state.user} onLogOut={this.handleLogOut} {...routeProps} />
           }} />
@@ -177,11 +177,14 @@ class App extends Component {
           <Route path={'/image-upload'} render={(routeProps) => {
                 return <ImageUpload {...routeProps} />
           }} />
-          </Switch>
-          {
-            this.state.user ? 
-            <Navbar user={this.state.user} /> : null
-          }
+          <Route path={"/addplant"} render={(RouteProps) => {
+            return <AddPlant/>
+          }} />
+        </Switch>
+        {
+          this.state.user ? 
+          <Navbar user={this.state.user} /> : null
+        }
       </div>
     )
   }

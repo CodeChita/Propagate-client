@@ -1,11 +1,18 @@
-import React from'react'
+import React from 'react'
+import { API_URL } from "../config";
 
 function AddPlant(props) {
     return (
-        <form onSubmit={props.onAddPlant}>
-        <input type="file"  accept="image/*" name="image" id="file" ></input>
-        <button type="submit" className="btn btn-primary">Submit</button>
-    </form>
+        <div>
+            <form method="POST" action={`${API_URL}/plant/upload`} encType="multipart/form-data">
+                <input type="file" name="imageUrl" accept="image/png, image/jpg" />
+                <select name='organ'>
+                    <option value="leaf">Leaf</option>
+                    <option value="flower">flower</option>
+                </select>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     )
 }
 
