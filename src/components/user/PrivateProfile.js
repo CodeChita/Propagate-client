@@ -26,20 +26,24 @@ export default class PrivateProfile extends Component {
         if (this.state.fetchingUser) {
             return <CircularProgress/>
           }
+        const {profileImageUrl, plantsOffered, username,} = this.state.user
         return (
-            <div>
-            <IconButton onClick={this.props.onLogOut} style={{position: 'relative', float: 'right'}}><ExitToApp fontSize="large"/></IconButton> 
+            <>
             <div style={{margin: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-            <Avatar alt="GB" src="./broken.png" />
+            <IconButton onClick={this.props.onLogOut} label="Logout" style={{alignSelf: 'flex-end'}}><ExitToApp fontSize="large"/></IconButton> 
+
+            <Avatar alt={username} src={profileImageUrl} />
             <Link to="/user/edit-profile">edit profile</Link>
             </div>
+            <div>
             { 
                 !this.state.user ? 
                 'You have no plants offered. Add some now!' : 
-                this.state.user.plantsOffered.map((plant, index) => {
+                plantsOffered.map((plant, index) => {
                 return <MyPlantOffer key={index} plant={plant} />
             })}
              </div>
+             </>
         )
     }
 }

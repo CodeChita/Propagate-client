@@ -2,14 +2,17 @@ import {Switch, Route, withRouter, Link} from "react-router-dom";
 import React, {Component} from 'react'
 import axios from 'axios'
 import { API_URL } from './config'
-import SignUp from "./components/Signup";
-import GoogleButton from "./components/GoogleButton";
-import Navbar from "./components/Navbar";
-import PrivateProfile from "./components/user/PrivateProfile";
-import ImageUpload from "./components/ImageUpload";
-import SignIn from "./components/SignIn";
-import EditProfile from "./components/user/EditProfile";
 import { CircularProgress } from "@material-ui/core";
+
+import SignUp from "./components/auth/Signup";
+import SignIn from "./components/auth/SignIn";
+import GoogleButton from "./components/auth/GoogleButton";
+
+import PrivateProfile from "./components/user/PrivateProfile";
+import EditProfile from "./components/user/EditProfile";
+
+import Navbar from "./components/Navbar";
+import ImageUpload from "./components/ImageUpload";
 import AddPlant from "./components/AddPlant";
 // import CapturePicture from "./components/CapturePicture";
 
