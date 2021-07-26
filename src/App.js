@@ -1,4 +1,4 @@
-import {Switch, Route, withRouter, Link, Redirect} from "react-router-dom";
+import {Switch, Route, withRouter, Link} from "react-router-dom";
 import React, {Component} from 'react'
 import axios from 'axios'
 import { API_URL } from './config'
@@ -11,8 +11,7 @@ import SignIn from "./components/SignIn";
 import EditProfile from "./components/user/EditProfile";
 import { CircularProgress } from "@material-ui/core";
 import AddPlant from "./components/AddPlant";
-import ShowPlant from "./components/ShowPlant";
-import CapturePicture from "./components/CapturePicture";
+// import CapturePicture from "./components/CapturePicture";
 
 class App extends Component {
   
@@ -146,9 +145,9 @@ class App extends Component {
     }
 
     return(
-      <div>
+      <>
       <div style={{border: '1px solid pink'}}>{this.state.user ? `Logged in User: ${this.state.user.email}` : 'no user logged in'}</div>
-        <img src="/images/propagate-med.svg" alt="propagate app" />
+        {/* <img src="/images/propagate-med.svg" alt="propagate app" /> */}
         <Switch>
           <Route exact path={'/'} render={(routeProps) =>{
             return(
@@ -177,15 +176,15 @@ class App extends Component {
           <Route path={'/image-upload'} render={(routeProps) => {
                 return <ImageUpload {...routeProps} />
           }} />
-          <Route path={"/addplant"} render={(RouteProps) => {
-            return <AddPlant/>
+          <Route path={"/addplant"} render={(routeProps) => {
+            return <AddPlant {...routeProps}/>
           }} />
         </Switch>
         {
           this.state.user ? 
           <Navbar user={this.state.user} /> : null
         }
-      </div>
+      </>
     )
   }
 

@@ -50,8 +50,10 @@ export default class EditProfile extends Component {
                 <TextField id="about" label="About Me" multiline rows={4} margin="normal" variant="outlined" /> <br/>
                 <TextField id="email" label="Email" defaultValue={email} margin="normal" variant="outlined" /> <br/>
                 
-                <Button variant="contained" color="secondary" size="large" startIcon={<Save />}>Save</Button>
+                <Button variant="contained" color="secondary" size="large" style={{marginBottom: '100px'}} startIcon={<Save />}>Save</Button>
+                
             </form>
+  
             </>
         )
     }

@@ -47,8 +47,11 @@ export default class MyPlantOffer extends Component{
 
             <img src={plantImageUrl} alt={scientificName}
                  style={{height: '100px', width : '100px' }} />
-            <Typography variant="h4">{displayName}</Typography>
 
+            <div style={{height : 'auto', display : 'flex', flexDirection : 'column', justifyContent : 'center'}}>
+            <Typography variant="h4">{displayName}</Typography>
+            <Typography variant="subtitle1">{scientificName}</Typography>
+            </div>
             <div style={{height : 'auto', display : 'flex', flexDirection : 'column', justifyContent : 'space-between'}}>
             <Link to={`/user/plant/${_id}/edit`}><IconButton><Edit/></IconButton></Link>
             <Switch checked={this.state.available} color="secondary" onChange={this.handleChange} name={scientificName} />
