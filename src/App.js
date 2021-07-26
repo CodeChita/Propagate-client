@@ -7,7 +7,7 @@ import GoogleButton from "./components/GoogleButton";
 import SignIn from "./components/SignIn"
 import AddPlant from "./components/AddPlant";
 import ShowPlant from "./components/ShowPlant";
-import ImageUpload from './components/ImageUpload'
+import CapturePicture from "./components/CapturePicture";
 
 class App extends Component {
   state = {
@@ -115,13 +115,15 @@ class App extends Component {
           }}
           />
           <Route path={"/addplant"} render={(RouteProps) => {
-            return <ImageUpload/>
+            return <AddPlant/>
           }} />
           <Route path={'/showPicture'} render={(RouteProps) =>{
             <ShowPlant/>
           }}
-          
           />
+           {/* <Route path={"/hello"} render={(RouteProps) => {
+            return <CapturePicture/>
+          }} /> */}
         </Switch>
       </div>
     )
