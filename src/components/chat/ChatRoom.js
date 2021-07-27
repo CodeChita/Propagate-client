@@ -103,10 +103,29 @@ class ChatPage extends Component {
                         </div>
                     </div>
                     <div className="messageInputs">
-                        <input value={this.state.currentMessage} type="text" placeholder="Message..."
-                            onChange={this.handleMessageInput}
+                        <input  type="text" placeholder="Message..."
+                            
                         />
-                        <button onClick={this.sendMessage}>Send</button>
+                        <TextField  variant="outlined" 
+                                    autoComplete="false" 
+                                    autoFocus 
+                                    fullWidth
+                                    label="Message..."
+                                    value={this.state.currentMessage}
+                                    onChange={this.handleMessageInput}
+                                    InputProps={{endAdornment: 
+                                    <InputAdornment position="end">
+                                    <IconButton color="primary" 
+                                            onClick={this.sendMessage}
+                                            onKeyDown={ (event) => {
+                                                if (event.key ==='Enter') {
+                                                    event.preventDefault()
+                                                    this.sendMessage 
+                                                }
+                                            }}> 
+                                            <Send /> </IconButton>
+                                </InputAdornment>}}
+                />
                     </div>
                 </div>
             </div>
