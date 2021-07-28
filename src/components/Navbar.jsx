@@ -45,21 +45,21 @@ export default function Navbar(props) {
             <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar>
           <IconButton edge="start" color="inherit">
-            <Link to={'/user/profile'}><Avatar alt={user.username} src={user.profileImageUrl}></Avatar></Link>
+            <Link underline="none"  to={'/user/profile'}><Avatar alt={user.username} src={user.profileImageUrl}></Avatar></Link>
           </IconButton>
           <IconButton color="inherit">
-            <Forum fontSize="large"/>
+            <Link underline="none"  to={'/user/chats'}> <Forum fontSize="large" /> </Link>
           </IconButton>
           <Fab color="secondary" aria-label="add" className={classes.fabButton}>
-            <Add />
+          <Link underline="none"  to={'/addplant'}> <Add /> </Link>
           </Fab>
           <div className={classes.grow} />
           <div>{user.email}</div>
           <IconButton color="inherit">
-            <Map fontSize="large"/>
+          <Link underline="none" color="white" to={'/user/map'} > <Map fontSize="large" /> </Link>
           </IconButton>
-          <IconButton edge="end" color="inherit">
-            <Search fontSize="large"/>
+          <IconButton edge="end" >
+           <Link underline="none" to={'/user/search'}>  <Search fontSize="large" /> </Link>
           </IconButton>
         </Toolbar>
       </AppBar>

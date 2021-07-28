@@ -2,14 +2,19 @@ import {Switch, Route, withRouter, Link} from "react-router-dom";
 import React, {Component} from 'react'
 import axios from 'axios'
 import { API_URL } from './config'
-import SignUp from "./components/Signup";
-import GoogleButton from "./components/GoogleButton";
-import Navbar from "./components/Navbar";
-import PrivateProfile from "./components/user/PrivateProfile";
-import ImageUpload from "./components/ImageUpload";
-import SignIn from "./components/SignIn";
-import EditProfile from "./components/user/EditProfile";
 import { CircularProgress } from "@material-ui/core";
+
+import SignUp from "./components/auth/Signup";
+import SignIn from "./components/auth/SignIn";
+import GoogleButton from "./components/auth/GoogleButton";
+
+import PrivateProfile from "./components/user/PrivateProfile";
+import EditProfile from "./components/user/EditProfile";
+import AllChats from "./components/chat/AllChats";
+import Search from "./components/Search/Search";
+
+import Navbar from "./components/Navbar";
+import ImageUpload from "./components/ImageUpload";
 import AddPlant from "./components/AddPlant";
 // import CapturePicture from "./components/CapturePicture";
 
@@ -28,15 +33,15 @@ class App extends Component {
 
    componentDidMount = async() => {
      try{
-    let userResponse = await axios.get(`${API_URL}/user`, {withCredentials: true})
-    console.log('App.js CDM get user', userResponse.data)
-     this.setState({
+    let userResponse = await axios.get(`${API_URL}/whoami`, {withCredentials: true})
+    console.log('App.js CDM whoami user', userResponse.data)
+     await this.setState({
           user: userResponse.data,
           fetchingUser: false,
         })
       }
-      catch(err) {
-        this.setState({
+       catch(err) {
+        await this.setState({
           fetchingUser: false,
         })
       }  
@@ -146,7 +151,7 @@ class App extends Component {
 
     return(
       <>
-      <div style={{border: '1px solid pink'}}>{this.state.user ? `Logged in User: ${this.state.user.email}` : 'no user logged in'}</div>
+      <div style={{border: '1px solid pink'}}>{this.state.user ? `Logged in User: ${this.state.user.email}` : `no user logged in: ${this.state.user}`}</div>
         {/* <img src="/images/propagate-med.svg" alt="propagate app" /> */}
         <Switch>
           <Route exact path={'/'} render={(routeProps) =>{
@@ -160,7 +165,7 @@ class App extends Component {
           <Route path={"/signup"} render={(routeProps) => {
             return (
             <>
-              <SignUp onSignUp={this.handleSignUp} {...routeProps} />
+              <SignUp errorMessage={this.state.errorMessage} onSignUp={this.handleSignUp} {...routeProps} />
               <GoogleButton onSuccess={this.handleGoogleSuccess} onFailure={this.handleGoogleFailure} />
             </>
           )}} />
@@ -169,6 +174,12 @@ class App extends Component {
           }}/>
           <Route path={'/user/profile'} render={(routeProps) => {
                 return <PrivateProfile user={this.state.user} onLogOut={this.handleLogOut} {...routeProps} />
+          }} />
+          <Route path={'/user/chats'} render={(routeProps) => {
+                return <AllChats me={this.state.user} {...routeProps} />
+          }} />
+          <Route path={'/user/search'} render={(routeProps) => {
+                return <Search me={this.state.user} {...routeProps} />
           }} />
           <Route path={'/user/edit-profile'} render={(routeProps) => {
                 return <EditProfile {...routeProps} />

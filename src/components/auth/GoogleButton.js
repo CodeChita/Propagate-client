@@ -1,6 +1,6 @@
 import React from 'react'
 import GoogleLogin from 'react-google-login';
-import { GOOGLE_ID } from '../config';
+import { GOOGLE_ID } from '../../config';
 
 function GoogleButton(props) {
     const {onSuccess, onFailure} = props
