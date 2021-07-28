@@ -1,10 +1,11 @@
-import { Avatar, IconButton, CircularProgress} from '@material-ui/core'
-import { ExitToApp } from '@material-ui/icons'
+import { Avatar, IconButton, CircularProgress, Typography} from '@material-ui/core'
+import { Delete, ExitToApp } from '@material-ui/icons'
 import React, { Component } from 'react'
 import MyPlantOffer from './MyPlantOffer'
 import axios from 'axios'
 import { API_URL } from '../../config'
 import { Link } from 'react-router-dom'
+import MyAvatarEditor from '../../utils/MyAvatarEditor'
 
 
 export default class PrivateProfile extends Component {
@@ -12,7 +13,7 @@ export default class PrivateProfile extends Component {
     componentDidMount = async () => {
         let response = await axios.get(`${API_URL}/user`, {withCredentials: true})
         console.log('PrivateProfile User data:', response.data)
-        this.setState({
+        await this.setState({
             user: response.data,
             fetchingUser: false
         })
@@ -42,6 +43,9 @@ export default class PrivateProfile extends Component {
                 plantsOffered.map((plant, index) => {
                 return <MyPlantOffer key={index} plant={plant} />
             })}
+            <div style={{color: "red", display: 'flex', justifyContent: 'center'}}>
+            <Delete /><Typography color="danger" variant="h6">Delete Account</Typography>
+            </div>
              </div>
              </>
         )

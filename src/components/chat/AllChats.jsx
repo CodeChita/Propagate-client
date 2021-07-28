@@ -38,8 +38,8 @@ import { Link } from 'react-router-dom'
                 <hr/> 
                     {allChats.map((convo) => {
                         return(
-                            <Link to={`/user/chat/${convo.them}`}>
-                            <div key={`chat-${convo.them}`} 
+                            <Link to={`/user/chat/${convo.them}`} key={`chat-${convo.them}`}>
+                            <div  
                                  style={{   border: 'grey 1px solid', 
                                             height: '75px', 
                                             display: 'flex', 
