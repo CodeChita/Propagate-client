@@ -54,7 +54,6 @@ export default function Navbar(props) {
           <Link underline="none"  to={'/addplant'}> <Add /> </Link>
           </Fab>
           <div className={classes.grow} />
-          <div>{user.email}</div>
           <IconButton color="inherit">
           <Link underline="none" color="white" to={'/user/map'} > <Map fontSize="large" /> </Link>
           </IconButton>

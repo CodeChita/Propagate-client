@@ -16,6 +16,7 @@ import Search from "./components/Search/Search";
 import Navbar from "./components/Navbar";
 import ImageUpload from "./components/ImageUpload";
 import AddPlant from "./components/AddPlant";
+import PublicProfile from "./components/user/PublicProfile";
 // import CapturePicture from "./components/CapturePicture";
 
 class App extends Component {
@@ -175,14 +176,17 @@ class App extends Component {
           <Route path={'/user/profile'} render={(routeProps) => {
                 return <PrivateProfile user={this.state.user} onLogOut={this.handleLogOut} {...routeProps} />
           }} />
+          <Route path={'/user/edit-profile'} render={(routeProps) => {
+                return <EditProfile {...routeProps} />
+          }} />
           <Route path={'/user/chats'} render={(routeProps) => {
                 return <AllChats me={this.state.user} {...routeProps} />
           }} />
           <Route path={'/user/search'} render={(routeProps) => {
                 return <Search me={this.state.user} {...routeProps} />
           }} />
-          <Route path={'/user/edit-profile'} render={(routeProps) => {
-                return <EditProfile {...routeProps} />
+          <Route path={'/user/:userId'} render={(routeProps) => {
+                return <PublicProfile {...routeProps} />
           }} />
           <Route path={'/image-upload'} render={(routeProps) => {
                 return <ImageUpload {...routeProps} />
