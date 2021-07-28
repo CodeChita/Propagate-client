@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {AppBar, Avatar, Button, Dialog, IconButton, Input, Slide, Toolbar, Typography} from '@material-ui/core';
+import {AppBar, Avatar, Button, Dialog, IconButton, Slide, Toolbar, Typography} from '@material-ui/core';
 
 import CloseIcon from '@material-ui/icons/Close';
 
-import AvatarEditor from 'react-avatar-editor'
+// import AvatarEditor from 'react-avatar-editor'
 
 const useStyles = makeStyles((theme) => ({
   appBar: {

@@ -11,7 +11,7 @@ import GoogleButton from "./components/auth/GoogleButton";
 import PrivateProfile from "./components/user/PrivateProfile";
 import EditProfile from "./components/user/EditProfile";
 import AllChats from "./components/chat/AllChats";
-import Search from "./components/Search/Search";
+// import Search from "./components/Search/Search";
 
 import Navbar from "./components/Navbar";
 import ImageUpload from "./components/ImageUpload";
@@ -178,9 +178,9 @@ class App extends Component {
           <Route path={'/user/chats'} render={(routeProps) => {
                 return <AllChats me={this.state.user} {...routeProps} />
           }} />
-          <Route path={'/user/search'} render={(routeProps) => {
+          {/* <Route path={'/user/search'} render={(routeProps) => {
                 return <Search me={this.state.user} {...routeProps} />
-          }} />
+          }} /> */}
           <Route path={'/user/edit-profile'} render={(routeProps) => {
                 return <EditProfile {...routeProps} />
           }} />
