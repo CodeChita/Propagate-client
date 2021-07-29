@@ -1,5 +1,4 @@
-import { Avatar, IconButton, Typography } from '@material-ui/core'
-import { Forum } from '@material-ui/icons'
+import { Avatar, Typography } from '@material-ui/core'
 import React from 'react'
 import { Link } from 'react-router-dom'
 

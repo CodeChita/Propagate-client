@@ -20,6 +20,8 @@ import CapturePicture from "./components/CapturePicture";
 
 import Maps from "./components/Maps";
 import PublicProfile from "./components/user/PublicProfile";
+import ChatPage from "./components/chat/ChatPage";
+
 // import CapturePicture from "./components/CapturePicture";
 
 class App extends Component {
@@ -156,8 +158,7 @@ class App extends Component {
 
     return(
       <>
-      <div style={{border: '1px solid pink'}}>{this.state.user ? `Logged in User: ${this.state.user.email}` : `no user logged in: ${this.state.user}`}</div>
-        {/* <img src="/images/propagate-med.svg" alt="propagate app" /> */}
+        <img src="/images/propagate-med.svg" alt="propagate app" />
         <Switch>
           <Route exact path={'/'} render={(routeProps) =>{
             return(
@@ -184,11 +185,14 @@ class App extends Component {
                 return <EditProfile {...routeProps} />
           }} />
            <Route exact path={'/users/:userId'} render={(routeProps) => {
-                return <PublicProfile me={this.state.user}{...routeProps} />
+                return <PublicProfile me={this.state.user} {...routeProps} />
           }} />
-          <Route exact path={'/user/chats'} render={(routeProps) => {
+          <Route exact path={'/chats'} render={(routeProps) => {
                 return <AllChats me={this.state.user} {...routeProps} />
           }} />
+           <Route path="/chat/:chatId"  render={(routeProps) => {
+              return  <ChatPage me={this.state.user} {...routeProps}  />
+            }}/>
           <Route exact path={'/search'} render={(routeProps) => {
                 return <Search {...routeProps} />
           }} />
