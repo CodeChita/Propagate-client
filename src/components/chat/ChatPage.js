@@ -1,14 +1,14 @@
 import axios from 'axios'
 import React, { Component } from 'react'
+import { API_URL, CHAT_URL, BASE_URL } from '../../config';
 import './ChatPage.css'
 import io from "socket.io-client";
-import {CHAT_URL, API_URL} from '../../config'
-
+import { Redirect } from 'react-router-dom';
 
 let socket = ''
 
-class ChatPage extends Component {
-    // Adding a ref to the messages div
+export default class ChatPage extends Component {
+    // adding a ref to the messages div
     messagesEnd = React.createRef()
     state = {
         loading: true, 
@@ -20,20 +20,21 @@ class ChatPage extends Component {
         this.messagesEnd.scrollIntoView({ behavior: "smooth" });
     }
 
-    async componentDidMount(){
+    componentDidMount(){
         //setup your socket connection with the server
-        socket = io(`${CHAT_URL}`); 
+        socket = io(`${API_URL}`);
 
         let conversationId = this.props.match.params.chatId
-        let response = await axios.get(`${CHAT_URL}/chatmessages/${conversationId}`, {withCredentials: true})
-        await this.setState({
+        axios.get(`${CHAT_URL}/messages/${conversationId}`)
+            .then((response) => {
+                this.setState({
                     loading: false, 
                     messageList: response.data
                 }, () => {
                     this.scrollToBottom();
                 })
-                
-        // ensure that the user is connected to a specific chat via webSocket    
+            })
+        // ensure you are connected to a specific chat via webSocket    
         socket.emit("join_chat", conversationId);
 
         //Handle incoming messages from webSocket
@@ -58,7 +59,7 @@ class ChatPage extends Component {
         let messageContent = {
             chatId: this.props.match.params.chatId,
             content: {
-              sender: this.props.user,
+              sender: this.props.me,
               message: this.state.currentMessage,
             },
           };
@@ -76,10 +77,14 @@ class ChatPage extends Component {
 
     render() {
         const { loading , messageList} = this.state
-        const { user } = this.props
+        const { me } = this.props
 
         if (loading) {
             <p>Loading all messages . . .</p>
+        }
+
+        if(!me){
+            return <Redirect to={'/signin'}  />
         }
 
         return (
@@ -90,7 +95,7 @@ class ChatPage extends Component {
                         {
                             messageList.map((val) => {
                                 return (
-                                    <div key={val._id} className="messageContainer" id={val.sender.name == user.name ? "You" : "Other"}>
+                                    <div key={val._id} className="messageContainer" id={val.sender.name == me.name ? "You" : "Other"}>
                                         <div className="messageIndividual">
                                             {val.sender.name}: {val.message}
                                         </div>
@@ -103,34 +108,13 @@ class ChatPage extends Component {
                         </div>
                     </div>
                     <div className="messageInputs">
-                        <input  type="text" placeholder="Message..."
-                            
+                        <input value={this.state.currentMessage} type="text" placeholder="Message..."
+                            onChange={this.handleMessageInput}
                         />
-                        <TextField  variant="outlined" 
-                                    autoComplete="false" 
-                                    autoFocus 
-                                    fullWidth
-                                    label="Message..."
-                                    value={this.state.currentMessage}
-                                    onChange={this.handleMessageInput}
-                                    InputProps={{endAdornment: 
-                                    <InputAdornment position="end">
-                                    <IconButton color="primary" 
-                                            onClick={this.sendMessage}
-                                            onKeyDown={ (event) => {
-                                                if (event.key ==='Enter') {
-                                                    event.preventDefault()
-                                                    this.sendMessage 
-                                                }
-                                            }}> 
-                                            <Send /> </IconButton>
-                                </InputAdornment>}}
-                />
+                        <button onClick={this.sendMessage}>Send</button>
                     </div>
                 </div>
             </div>
         )
     }
 }
-
-export default ChatPage
