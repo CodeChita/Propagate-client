@@ -33,7 +33,7 @@ export default function SingleSearchResult(props) {
                         <Typography variant="subtitle2">{city}</Typography>
                     </div>
                     <div style={{ height: 'auto', width: '25vw', maxWidth: '100px', display: 'flex', flexDirection: 'column',  alignItems: 'center', justifyContent: 'center' }}>
-                        <Link to={{pathname: `/user/${userId}`, state:{plant: plantId}}}>
+                        <Link to={{pathname: `/users/${userId}`, state:{plant: plantId}}}>
                         <Avatar alt={username} src={profileImageUrl} />
                         </Link>
                         <Typography varient="caption" align="center" >{username}</Typography>

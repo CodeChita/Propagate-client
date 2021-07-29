@@ -10,17 +10,20 @@ import { Link } from 'react-router-dom'
 export default class PublicProfile extends Component {
     
     state = {
-        thisuser: null,
-        fetchingUser: true
+        them: null,
+        fetchingUser: true,
+        me: null
     }
 
     componentDidMount = async () => {
         const thisUser = this.props.match.params.userId
+        const me = this.props.me
         let response = await axios.get(`${API_URL}/users/${thisUser}`, {withCredentials: true})
         console.log('Public User data:', response.data)
         await this.setState({
-            thisUser: response.data,
-            fetchingUser: false
+            them: response.data,
+            fetchingUser: false,
+            me: me
         })
     }
     
@@ -31,12 +34,11 @@ export default class PublicProfile extends Component {
         return (
             <>
             <div style={{margin: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-            <h1>{this.state.thisUser.username}</h1>
             <Avatar alt='username' src='profileImageUrl' />
+            <h1>{this.state.them.username}</h1>
+            <Typography variant="subtitle2" color="textSecondary">{this.state.them.about}</Typography>
             </div>
-            <div>
-           
-             </div>
+            
              </>
         )
     }

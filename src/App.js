@@ -183,15 +183,16 @@ class App extends Component {
           <Route exact path={'/user/edit-profile'} render={(routeProps) => {
                 return <EditProfile {...routeProps} />
           }} />
+           <Route exact path={'/users/:userId'} render={(routeProps) => {
+                return <PublicProfile me={this.state.user}{...routeProps} />
+          }} />
           <Route exact path={'/user/chats'} render={(routeProps) => {
                 return <AllChats me={this.state.user} {...routeProps} />
           }} />
-          <Route exact path={'/user/search'} render={(routeProps) => {
-                return <Search me={this.state.user} {...routeProps} />
+          <Route exact path={'/search'} render={(routeProps) => {
+                return <Search {...routeProps} />
           }} />
-          <Route exact path={'/user/:userId'} render={(routeProps) => {
-                return <PublicProfile {...routeProps} />
-          }} />
+         
           <Route path={'/image-upload'} render={(routeProps) => {
                 return <ImageUpload {...routeProps} />
           }} />
