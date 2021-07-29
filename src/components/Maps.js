@@ -1,4 +1,5 @@
-import React, { useEffect, useState, Link } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import L from 'leaflet';
 import { TextField, InputAdornment, CircularProgress } from '@material-ui/core'
@@ -84,7 +85,11 @@ function MyMap() {
 						return (
 							<Marker position={plant.geoLocation} icon={ ironhackLogo }>
 								<Popup>
-									{plant.displayName} <br /> <img src={plant.plantImageUrl} alt='pic of plant' width='50px'/>.
+								<Link to={{pathname: `/users/${plant.user._id}`, state:{plant: plant._id}}}>CLICK</Link> 
+									{/* <Link to={{`/users/${plant.user._id}`}}>{plant.displayName} */}
+									<br /> 
+									<img src={plant.plantImageUrl} alt='pic of plant' width='50px'/>.
+									{/* <Link to={{pathname: `/users/${plant.user._id}`}}>click here</Link> */}
 								</Popup>
 							</Marker>
 						)
