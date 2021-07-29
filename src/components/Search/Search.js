@@ -35,9 +35,7 @@ export default class Search extends Component {
       }
 
     render() {
-        if (this.state.loading) {
-            return <CircularProgress/>
-          }
+        if (this.state.loading) {return <CircularProgress/>}
         return (
             
             <div>

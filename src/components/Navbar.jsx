@@ -48,7 +48,7 @@ export default function Navbar(props) {
             <Link underline="none"  to={'/user/profile'}><Avatar alt={user.username} src={user.profileImageUrl}></Avatar></Link>
           </IconButton>
           <IconButton color="inherit">
-            <Link underline="none"  to={'/user/chats'}> <Forum fontSize="large" /> </Link>
+            <Link underline="none"  to={'/chats'}> <Forum fontSize="large" /> </Link>
           </IconButton>
           <Fab color="secondary" aria-label="add" className={classes.fabButton}>
           <Link underline="none"  to={'/addplant'}> <Add /> </Link>
