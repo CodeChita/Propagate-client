@@ -1,5 +1,5 @@
 import { Avatar, IconButton, Typography } from '@material-ui/core'
-import { Forum } from '@material-ui/icons'
+import { Forum, ForumOutlined } from '@material-ui/icons'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -33,8 +33,8 @@ export default function SinglePlantCard(props) {
                         <Typography variant="subtitle2">{city}</Typography>
                     </div>
                     <div style={{ height: 'auto', width: '25vw', maxWidth: '100px', display: 'flex', flexDirection: 'column',  alignItems: 'center', justifyContent: 'center' }}>
-                        <Link to={{pathname: `/user/${userId}`, state:{plant: plantId}}}>
-                        <Avatar alt={username} src={profileImageUrl} />
+                        <IconButton><ForumOutlined /> </IconButton>
+                        
                         </Link>
                         <Typography varient="caption" align="center" >{username}</Typography>
                     </div>

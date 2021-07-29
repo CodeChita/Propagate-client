@@ -55,10 +55,10 @@ export default function Navbar(props) {
           </Fab>
           <div className={classes.grow} />
           <IconButton color="inherit">
-          <Link underline="none" color="white" to={'/user/map'} > <Map fontSize="large" /> </Link>
+          <Link underline="none" color="white" to={'/map'} > <Map fontSize="large" /> </Link>
           </IconButton>
           <IconButton edge="end" >
-           <Link underline="none" to={'/user/search'}>  <Search fontSize="large" /> </Link>
+           <Link underline="none" to={'/search'}>  <Search fontSize="large" /> </Link>
           </IconButton>
         </Toolbar>
       </AppBar>
