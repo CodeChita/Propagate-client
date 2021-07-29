@@ -43,7 +43,6 @@ export default class PrivateProfile extends Component {
                                 return <MyPlantOffer key={index} plant={plant} />
                             })}
                     <div style={{ color: "red", display: 'flex', justifyContent: 'center', margin: '100px'}}>
-                        <Delete /><Typography color="error" variant="h6">Delete Account</Typography>
                     </div>
                 </div>
             </>

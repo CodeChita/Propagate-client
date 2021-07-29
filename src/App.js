@@ -21,6 +21,7 @@ import CapturePicture from "./components/CapturePicture";
 import Maps from "./components/Maps";
 import PublicProfile from "./components/user/PublicProfile";
 import ChatPage from "./components/chat/ChatPage";
+import NotFound from "./utils/NotFound";
 
 // import CapturePicture from "./components/CapturePicture";
 
@@ -209,6 +210,7 @@ class App extends Component {
           <Route path={'/capture'} render={(routerProps) => {
             return <CapturePicture/>
           }} />
+          <Route  component={NotFound} />
         </Switch>
         {
           this.state.user ? 

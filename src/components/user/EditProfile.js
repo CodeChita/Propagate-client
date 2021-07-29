@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { API_URL } from '../../config'
-import { Avatar, Button, CircularProgress, IconButton, TextField } from '@material-ui/core'
-import { ArrowBackIos, Save } from '@material-ui/icons'
+import { Avatar, Button, CircularProgress, IconButton, TextField, Typography } from '@material-ui/core'
+import { ArrowBackIos, Save, Delete } from '@material-ui/icons'
 import { Link } from 'react-router-dom'
+import DeleteConfirm from '../../utils/DeleteConfirm'
 
 export default class EditProfile extends Component {
 
@@ -14,7 +15,7 @@ export default class EditProfile extends Component {
 
     componentDidMount = async() => {
         try{
-       let response = await axios.get(`${API_URL}/user`, {withCredentials: true})
+       let response = await axios.get(`${API_URL}/user/whoami`, {withCredentials: true})
        console.log('Edit Profile CDM get user', response.data)
         this.setState({
              user: response.data,
@@ -57,6 +58,19 @@ export default class EditProfile extends Component {
       this.props.history.goBack()
     }
 
+    handleDelete = async () => {
+      try{
+        let response1  = await axios.delete(`${API_URL}/user/profile/${this.state.user._id}`, {}, {withCredentials: true})
+        let response2 = await axios.post(`${API_URL}/logout`, {}, {withCredentials: true})
+        this.setState({ user: null } , () => {this.props.history.push('/')})
+      }
+      catch(err) {
+          console.log('Logout failed', err)
+        }
+
+      }
+  
+    
     render() {
             if (this.state.fetchingUser) {
                 return (
@@ -108,10 +122,12 @@ export default class EditProfile extends Component {
                             variant="contained" 
                             color="primary" 
                             size="large" 
-                            style={{marginBottom: '100px'}} 
                             startIcon={<Save />}> Save </Button>
                 
   
+                <div style={{ color: "red", display: 'flex', justifyContent: 'center', margin: '100px'}}>
+                        <DeleteConfirm onDelete={this.handleDelete} />
+                    </div>
             </div>
         )
     }
