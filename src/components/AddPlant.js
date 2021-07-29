@@ -3,7 +3,7 @@ import { API_URL } from "../config";
 import UploadPlant from './AddingPlant/UploadPlant';
 import PickingName from './AddingPlant/PickingName';
 import axios from 'axios'
-import { ThemeConsumer } from 'styled-components';
+// import { ThemeConsumer } from 'styled-components';
 
 
 function AddPlant(props) {

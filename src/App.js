@@ -16,7 +16,9 @@ import AllChats from "./components/chat/AllChats";
 import Navbar from "./components/Navbar";
 import ImageUpload from "./components/ImageUpload";
 import AddPlant from "./components/AddPlant";
-// import CapturePicture from "./components/CapturePicture";
+import CapturePicture from "./components/CapturePicture";
+
+import Maps from "./components/Maps";
 
 class App extends Component {
   
@@ -64,6 +66,7 @@ class App extends Component {
       if (response.data.errorMessage) {
         this.setState({errorMessage: response.data.errorMessage})
       }
+      this.props.history.push('/')
     }
     catch (err) {
       console.log('Appjs Signup failed', err)
@@ -189,6 +192,12 @@ class App extends Component {
           }} />
           <Route path={"/addplant"} render={(routeProps) => {
             return <AddPlant {...routeProps}/>
+          }} />
+          <Route path={"/maps"} render={(routeProps) =>{
+            return <Maps{...routeProps}/>
+          }} />
+          <Route path={'/capture'} render={(routerProps) => {
+            return <CapturePicture/>
           }} />
         </Switch>
         {
