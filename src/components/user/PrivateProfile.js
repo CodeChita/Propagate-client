@@ -32,10 +32,10 @@ export default class PrivateProfile extends Component {
                 <div style={{ margin: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <IconButton onClick={this.props.onLogOut} label="Logout" style={{ alignSelf: 'flex-end' }}><ExitToApp fontSize="large" /></IconButton>
 
-                    <Avatar alt={username} src={profileImageUrl} />
+                    <Avatar alt={username} src={profileImageUrl} > </Avatar>
                     <Link to="/user/edit-profile">edit profile</Link>
                 </div>
-                <div>
+                <div  style={{ margin: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     {
                         !this.state.user ?
                             'You have no plants offered. Add some now!' :

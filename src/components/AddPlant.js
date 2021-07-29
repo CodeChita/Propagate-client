@@ -9,6 +9,7 @@ import axios from 'axios'
 function AddPlant(props) {
     const [plantName, setPlantName] = useState({})
     const [hide, setHide] = useState(true)
+
     async function handelImageUpload(event) {
         event.preventDefault();
         const file = event.target.imageUrl.files[0]

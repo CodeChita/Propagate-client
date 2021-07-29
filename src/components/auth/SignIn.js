@@ -1,20 +1,24 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { TextField, Button } from '@material-ui/core';
 
-function SignIn(props){
+function SignIn(props) {
     return (
-        <form onSubmit={props.onSignIn}>
-            <div className="form-group">
-                <label htmlFor="InputEmail">Email address</label>
-                <input type="email" className="form-control" id="InputEmail" name="email" />
+        <div >
+        <form style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '5px', margin: '5px'}} onSubmit={props.onSignIn}>
+            <div style={{margin: '5px'}} className="form-group">
+                <TextField id="email" label="E-mail" name="email" variant="outlined" />
+
             </div>
-            <div className="form-group">
-                <label htmlFor="InputPassword">Password</label>
-                <input name="password" type="password" className="form-control" id="InputPassword" />
+            <div style={{margin: '5px'}} className="form-group">
+                <TextField type='password' id="password" label="Password" name="pasword" variant="outlined" />
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
-            
+            <Button type="submit" color="primary" variant="contained" className="btn btn-primary" style={{ margin: '5px' }}>Submit</Button>
             {props.errorMessage ? <p>{props.errorMessage}</p> : null}
+
         </form>
+        <Link style={{display: 'flex', justifyContent: 'center'}} to={`/signup`}>sign up?</Link>
+        </div>
     )
 }
 
