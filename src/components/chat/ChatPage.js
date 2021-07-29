@@ -22,11 +22,12 @@ export default class ChatPage extends Component {
 
     componentDidMount(){
         //setup your socket connection with the server
-        socket = io(`${API_URL}`);
+        socket = io(`${BASE_URL}`);
 
         let conversationId = this.props.match.params.chatId
         axios.get(`${CHAT_URL}/messages/${conversationId}`)
             .then((response) => {
+                console.log(response)
                 this.setState({
                     loading: false, 
                     messageList: response.data
