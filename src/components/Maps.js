@@ -2,16 +2,33 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import L from 'leaflet';
-import { TextField, InputAdornment, CircularProgress } from '@material-ui/core'
+import { Avatar, Button, CircularProgress, IconButton, TextField, Typography } from '@material-ui/core'
 import axios from 'axios'
 import { API_URL } from "../config";
 //Don't forget to import the css
 import 'leaflet/dist/leaflet.css'
 
+import { createTheme } from '@material-ui/core/styles';
 
 
 function MyMap() {
-	
+	const theme = createTheme({
+		palette: {
+		  primary: {
+			light: '#757ce8',
+			main: '#3f50b5',
+			dark: '#002884',
+			contrastText: '#fff',
+		  },
+		  secondary: {
+			light: '#ff7961',
+			main: '#f44336',
+			dark: '#ba000d',
+			contrastText: '#000',
+		  },
+		},
+	  });
+	  
 
 	const ironhackLogo = new L.Icon({
 		iconUrl: '../logo192.png',
@@ -61,21 +78,23 @@ function MyMap() {
 
 	return (
 		<div>
-			<form onSubmit={handleSearch}>
+			<form style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '5px', margin: '5px' }} onSubmit={handleSearch}>
 				<TextField id="searchBar"
 					label="Search for plants..."
 					name='city' variant="outlined" autoComplete="false" autoFocus fullWidth
 				/>
-				<button type='submit'>Submit</button>Ï
+				<Button variant="contained" 
+                            color="#1f998a" 
+                            size="large" 
+							type='submit'>Submit</Button>
 			</form>
-			<p>{position[0]}</p><p>{position[1]}</p>
 			<MapContainer
-				style={{ width: '500px', height: '500px' }}
-				center={position} zoom={13}
+				style={{ width: '500px', height: '500px', display: 'flex',  justifyContent: 'center', alignItems: 'center', padding: '5px', margin: '5px' }}
+				center={position} zoom={12}
 				scrollWheelZoom={true}
 			>
 
-				<ChangeView center={position} zoom={13} />
+				<ChangeView center={position} zoom={12} />
 				<TileLayer
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -85,11 +104,9 @@ function MyMap() {
 						return (
 							<Marker position={plant.geoLocation} icon={ ironhackLogo }>
 								<Popup>
-								<Link to={{pathname: `/users/${plant.user._id}`, state:{plant: plant._id}}}>CLICK</Link> 
-									{/* <Link to={{`/users/${plant.user._id}`}}>{plant.displayName} */}
+								<Link to={{pathname: `/users/${plant.user._id}`, state:{plant: plant._id}}}>{plant.displayName}</Link> 
 									<br /> 
 									<img src={plant.plantImageUrl} alt='pic of plant' width='50px'/>.
-									{/* <Link to={{pathname: `/users/${plant.user._id}`}}>click here</Link> */}
 								</Popup>
 							</Marker>
 						)
