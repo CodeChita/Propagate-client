@@ -13,6 +13,8 @@ export default function PickingName(props) {
                         return <option key={i} value={plantName}>{plantName}</option>
                     })}
                 </select> <br/>
+                <label for="zipCode">Zip code</label>
+                <input type="text" id="zipCode" name="zipCode" /> <br/>
                 <label for="city">city</label>
                 <input type="text" id="city" name="city" /> <br/>
                 <button type='submit'>Submit</button>
