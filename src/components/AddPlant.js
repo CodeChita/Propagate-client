@@ -29,16 +29,13 @@ function AddPlant(props) {
     }
     async function handelAddingPlant(event) {
         event.preventDefault()
-        // let point = event.target.city.value
-        // let location = await axios (`https://nominatim.openstreetmap.org/search.php?city=amsterdam&format=json&accept-language=en`)
-        // console.log(location[0])
-
         const plantData = await {
             plantImageUrl: plantName.picture,
             displayName: event.target.plantName.value,
             scientificName: plantName.plant.species.scientificNameWithoutAuthor,
             commonName: plantName.plant.species.commonNames,
             location: event.target.city.value,
+            zipCode: event.target.zipCode.value
         }
         console.log(plantData.location)
         await axios({

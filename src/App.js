@@ -199,8 +199,8 @@ class App extends Component {
           <Route path={"/addplant"} render={(routeProps) => {
             return <AddPlant {...routeProps}/>
           }} />
-          <Route path={"/maps"} render={(routeProps) =>{
-            return <Maps{...routeProps}/>
+          <Route path={"/map"} render={(routeProps) =>{
+            return <Maps {...routeProps}/>
           }} />
           <Route path={'/capture'} render={(routerProps) => {
             return <CapturePicture/>
