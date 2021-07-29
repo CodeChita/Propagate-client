@@ -1,49 +1,57 @@
-// import { TextField, Typography, InputAdornment, IconButton} from '@material-ui/core'
-// import { SearchOutlined } from '@material-ui/icons'
-// import axios from 'axios'
-// import React, { useState, useEffect } from 'react'
-// import { API_URL } from '../../config'
+import React, { Component } from 'react'
+import { TextField, InputAdornment, CircularProgress} from '@material-ui/core'
+import { SearchOutlined } from '@material-ui/icons'
+import axios from 'axios'
+import { API_URL } from '../../config'
+import SingleSearchResult from './SingleSearchResult'
 
-// function Search (props) {
+export default class Search extends Component {
+    
+    state = {
+        allPlants: null,
+        filteredPlants: null,
+        loading: true
 
-//     useEffect( async () => {
-//         let allPlants = await axios.get(`${API_URL}/user/search`, {}, {withCredentials: true})
-//         console.log('ALL PLANTS', allPlants.length)
-//     }, [])
-//         const filteredPlants = JSON.parse(JSON.stringify(allPlants))   
+    }
+    async componentDidMount() {
+        let response = await axios.get(`${API_URL}/search`, {withCredentials: true});
+        console.log('ALL PLANTS', response.data)
+        this.setState({
+            allPlants: response.data,
+            filteredPlants: response.data,
+            loading: false
+        })
+    }
+    
+    handleSearch = (event) => {
+        const {allPlants} = this.state
+        let searchedPlant = event.target.value
+        let  filteredPlants = allPlants.filter((plant) => {
+            let concat = `${plant.scientificName} ${plant.displayName} ${plant.commonName[0]} ${plant.commonName[1]} ${plant.commonName[2]}`
+            return concat.toLowerCase().includes(searchedPlant.toLowerCase())
+        })
+        this.setState({ filteredPlants: filteredPlants})
+    
+      }
 
-           
-//     const [allPlants, setAllPlants] = useState(allPlants)
-//     const [fPlants, setfPlants] = useState(filteredPlants)
+    render() {
+        if (this.state.loading) {
+            return <CircularProgress/>
+          }
+        return (
+            
+            <div>
+                <TextField  id="searchBar"
+                            label="Search for plants..."
+                            onChange={this.handleSearch}
+                            variant="outlined" autoComplete="false" autoFocus fullWidth
+                            InputProps={{startAdornment:  <InputAdornment position="start"> <SearchOutlined /> </InputAdornment>}}
+                />
+                { this.state.filteredPlants.map((plant, index) => {
+                    return ( <SingleSearchResult key={index} plant={plant} />)
+                })}
+            </div>
+        )
+    }
+}
 
-//     handleSearch = (event) => {
-//         let searchedPlant = event.target.value
-        
-//         let concatPlants = allPlants.forEach((plant) => {
-//             plant.concat = `${plant.scientificName} ${plant.displayName} ${plant.commonName[0]} ${plant.commonName[1]} ${plant.commonName[2]}`
-//             console.log(plant.concat)
-//         })
-//         this.setState ( {filteredBooks: filteredBookList})
-//       }
-
-//     return (
-//         <div>
-//             <TextField  id="searchBar"
-//                         label="Search for plants..."
-//                         placeholder=''
-//                         value={searchField}
-//                         onChange={handleChange}
-//                         variant="outlined" autoComplete="false" autoFocus fullWidth
-//                         InputProps={{endAdornment: 
-//                                     <InputAdornment position="end">
-//                                     <IconButton color="primary" onClick={handleSearch}> 
-//                                     <SearchOutlined /> 
-//                                     </IconButton>
-//                                     </InputAdornment>
-//                                     }}
-//             />
-//             <Typography variant="subtitle2" color="textSecondary">{searchError ? searchError : null}</Typography>
-//         </div>
-//     )
-// }
-// export default Search

@@ -4,8 +4,6 @@ import {AppBar, Avatar, Button, Dialog, IconButton, Slide, Toolbar, Typography} 
 
 import CloseIcon from '@material-ui/icons/Close';
 
-// import AvatarEditor from 'react-avatar-editor'
-
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: 'relative',

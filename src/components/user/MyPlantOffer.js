@@ -26,7 +26,7 @@ export default class MyPlantOffer extends Component{
 
         }))
         console.log('state log before axios', this.state.plant)
-        let response = await axios.patch(`${API_URL}/user/plant/${this.state.plant._id}`, {plant: this.state.plant})
+        let response = await axios.patch(`${API_URL}/user/plant/${this.state.plant._id}`, {plant: this.state.plant}, {withCredentials: true})
         console.log('response', response.data)
         await this.setState({plant: response.data})   
         console.log('state after update from response', this.state.plant) 

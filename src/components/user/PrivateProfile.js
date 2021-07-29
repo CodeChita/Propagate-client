@@ -5,13 +5,12 @@ import MyPlantOffer from './MyPlantOffer'
 import axios from 'axios'
 import { API_URL } from '../../config'
 import { Link } from 'react-router-dom'
-// import MyAvatarEditor from '../../utils/MyAvatarEditor'
 
 
 export default class PrivateProfile extends Component {
 
     componentDidMount = async () => {
-        let response = await axios.get(`${API_URL}/user`, { withCredentials: true })
+        let response = await axios.get(`${API_URL}/whoami`, {withCredentials: true})
         console.log('PrivateProfile User data:', response.data)
         await this.setState({
             user: response.data,
@@ -43,8 +42,8 @@ export default class PrivateProfile extends Component {
                             plantsOffered.map((plant, index) => {
                                 return <MyPlantOffer key={index} plant={plant} />
                             })}
-                    <div style={{ color: "red", display: 'flex', justifyContent: 'center' }}>
-                        <Delete /><Typography color="danger" variant="h6">Delete Account</Typography>
+                    <div style={{ color: "red", display: 'flex', justifyContent: 'center', margin: '100px'}}>
+                        <Delete /><Typography color="error" variant="h6">Delete Account</Typography>
                     </div>
                 </div>
             </>

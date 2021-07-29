@@ -25,7 +25,7 @@ class ChatPage extends Component {
         socket = io(`${CHAT_URL}`); 
 
         let conversationId = this.props.match.params.chatId
-        let response = await axios.get(`${CHAT_URL}/chatmessages/${conversationId}`)
+        let response = await axios.get(`${CHAT_URL}/chatmessages/${conversationId}`, {withCredentials: true})
         await this.setState({
                     loading: false, 
                     messageList: response.data
