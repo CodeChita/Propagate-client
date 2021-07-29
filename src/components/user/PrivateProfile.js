@@ -42,8 +42,8 @@ export default class PrivateProfile extends Component {
                             plantsOffered.map((plant, index) => {
                                 return <MyPlantOffer key={index} plant={plant} />
                             })}
-                    <div style={{ color: "red", display: 'flex', justifyContent: 'center' }}>
-                        <Delete /><Typography color="danger" variant="h6">Delete Account</Typography>
+                    <div style={{ color: "red", display: 'flex', justifyContent: 'center', margin: '100px'}}>
+                        <Delete /><Typography color="error" variant="h6">Delete Account</Typography>
                     </div>
                 </div>
             </>
