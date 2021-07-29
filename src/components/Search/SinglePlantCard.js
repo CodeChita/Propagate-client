@@ -35,7 +35,7 @@ export default function SinglePlantCard(props) {
                     <div style={{ height: 'auto', width: '25vw', maxWidth: '100px', display: 'flex', flexDirection: 'column',  alignItems: 'center', justifyContent: 'center' }}>
                         <IconButton><ForumOutlined /> </IconButton>
                         
-                        </Link>
+                        <Link/>
                         <Typography varient="caption" align="center" >{username}</Typography>
                     </div>
             </div> 

@@ -20,26 +20,31 @@ function AddPlant(props) {
             method: 'post',
             url: `${API_URL}/plant/upload`,
             data: uploadForm
-        })  
+        })
         setPlantName(result.data)
         setHide(false)
         console.log(result.data)
 
 
     }
-   async function handelAddingPlant(event) {
+    async function handelAddingPlant(event) {
         event.preventDefault()
-        const plantData = {
+        // let point = event.target.city.value
+        // let location = await axios (`https://nominatim.openstreetmap.org/search.php?city=amsterdam&format=json&accept-language=en`)
+        // console.log(location[0])
+
+        const plantData = await {
             plantImageUrl: plantName.picture,
             displayName: event.target.plantName.value,
             scientificName: plantName.plant.species.scientificNameWithoutAuthor,
             commonName: plantName.plant.species.commonNames,
-            location: event.target.city.value, 
+            location: event.target.city.value,
         }
-         await axios({
+        console.log(plantData.location)
+        await axios({
             method: 'post',
             url: `${API_URL}/plant/add`,
-            data: plantData, 
+            data: plantData,
             withCredentials: true
         })
         props.history.push('/user/profile')

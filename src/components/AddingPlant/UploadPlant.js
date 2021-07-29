@@ -7,7 +7,7 @@ export default function ImageUpload(props) {
     return (
         <div>
             <form onSubmit={onImageUpload} >
-                <CapturePicture/>
+                {/* <CapturePicture/> */}
                 <input type="file" name="imageUrl" accept="image/png, image/jpg" />
                 <select name='organ'>
                     <option value="leaf">Leaf</option>
