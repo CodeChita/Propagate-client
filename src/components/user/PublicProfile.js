@@ -9,21 +9,21 @@ import { Link } from 'react-router-dom'
 
 export default class PublicProfile extends Component {
     
-    componentDidMount = async () => {
-        const thisUser = this.props.match.params.userId
-     
-        let response = await axios.get(`${API_URL}/user/${thisUser}`, {withCredentials: true})
-        // console.log('Public User data:', response.data)
-        // await this.setState({
-            // thisUser: response.data,
-            // fetchingUser: false
-        }
-    
-
     state = {
-        user: null,
+        thisuser: null,
         fetchingUser: true
     }
+
+    componentDidMount = async () => {
+        const thisUser = this.props.match.params.userId
+        let response = await axios.get(`${API_URL}/users/${thisUser}`, {withCredentials: true})
+        console.log('Public User data:', response.data)
+        await this.setState({
+            thisUser: response.data,
+            fetchingUser: false
+        })
+    }
+    
     render() {
         if (this.state.fetchingUser) {
             return <CircularProgress/>
@@ -31,17 +31,10 @@ export default class PublicProfile extends Component {
         return (
             <>
             <div style={{margin: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-
+            <h1>{this.state.thisUser.username}</h1>
             <Avatar alt='username' src='profileImageUrl' />
-            <Link to="/user/edit-profile">edit profile</Link>
             </div>
             <div>
-            {/* { 
-                !this.state.user ? 
-                'You have no plants offered. Add some now!' : 
-                plantsOffered.map((plant, index) => {
-                return <MyPlantOffer key={index} plant={plant} />
-            })} */}
            
              </div>
              </>

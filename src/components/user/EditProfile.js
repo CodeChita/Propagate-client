@@ -50,7 +50,7 @@ export default class EditProfile extends Component {
     handleUpdateProfile = async () => {
 
       console.log('state log before axios', this.state.user)
-      let response = await axios.patch(`${API_URL}/user/profile`, {user: this.state.user})
+      let response = await axios.patch(`${API_URL}/user/profile`, {user: this.state.user}, {withCredentials: true})
       console.log('patch User response', response.data)
       await this.setState({user: response.data})   
       console.log('state after update from response', this.state.user) 

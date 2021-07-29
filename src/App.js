@@ -173,19 +173,19 @@ class App extends Component {
           <Route exact path={"/signin"} render={(routeProps) => {
                 return  <SignIn  errorMessage={this.state.errorMessage} onSignIn={this.handleSignIn} {...routeProps}  />
           }}/>
-          <Route path={'/user/profile'} render={(routeProps) => {
+          <Route exact path={'/user/profile'} render={(routeProps) => {
                 return <PrivateProfile user={this.state.user} onLogOut={this.handleLogOut} {...routeProps} />
           }} />
-          <Route path={'/user/edit-profile'} render={(routeProps) => {
+          <Route exact path={'/user/edit-profile'} render={(routeProps) => {
                 return <EditProfile {...routeProps} />
           }} />
-          <Route path={'/user/chats'} render={(routeProps) => {
+          <Route exact path={'/user/chats'} render={(routeProps) => {
                 return <AllChats me={this.state.user} {...routeProps} />
           }} />
-          <Route path={'/user/search'} render={(routeProps) => {
+          <Route exact path={'/user/search'} render={(routeProps) => {
                 return <Search me={this.state.user} {...routeProps} />
           }} />
-          <Route path={'/user/:userId'} render={(routeProps) => {
+          <Route exact path={'/user/:userId'} render={(routeProps) => {
                 return <PublicProfile {...routeProps} />
           }} />
           <Route path={'/image-upload'} render={(routeProps) => {

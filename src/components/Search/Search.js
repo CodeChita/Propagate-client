@@ -14,7 +14,7 @@ export default class Search extends Component {
 
     }
     async componentDidMount() {
-        let response = await axios.get(`${API_URL}/search`, {}, {withCredentials: true});
+        let response = await axios.get(`${API_URL}/search`, {withCredentials: true});
         console.log('ALL PLANTS', response.data)
         this.setState({
             allPlants: response.data,

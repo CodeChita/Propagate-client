@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 export default class PrivateProfile extends Component {
     
     componentDidMount = async () => {
-        let response = await axios.get(`${API_URL}/user`, {withCredentials: true})
+        let response = await axios.get(`${API_URL}/whoami`, {withCredentials: true})
         console.log('PrivateProfile User data:', response.data)
         await this.setState({
             user: response.data,

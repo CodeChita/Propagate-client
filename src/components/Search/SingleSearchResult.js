@@ -29,7 +29,7 @@ export default function SingleSearchResult(props) {
 
                     <div style={{ paddingLeft: '5px', width: '50vw', height: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                         <Typography variant="h5">{displayName}</Typography>
-                        <Typography nowrap variant="subtitle1">{scientificName}</Typography>
+                        <Typography variant="subtitle1">{scientificName}</Typography>
                         <Typography variant="subtitle2">{city}</Typography>
                     </div>
                     <div style={{ height: 'auto', width: '25vw', maxWidth: '100px', display: 'flex', flexDirection: 'column',  alignItems: 'center', justifyContent: 'center' }}>
