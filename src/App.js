@@ -11,7 +11,7 @@ import GoogleButton from "./components/auth/GoogleButton";
 import PrivateProfile from "./components/user/PrivateProfile";
 import EditProfile from "./components/user/EditProfile";
 import AllChats from "./components/chat/AllChats";
-import Search from "./components/Search/Search";
+// import Search from "./components/Search/Search";
 
 import Navbar from "./components/Navbar";
 import ImageUpload from "./components/ImageUpload";
