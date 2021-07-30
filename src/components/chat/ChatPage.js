@@ -14,6 +14,7 @@ export default class ChatPage extends Component {
         loading: true, 
         messageList: [],
         currentMessage: '',
+        me: this.props.me
     }
 
     scrollToBottom = () => {
@@ -96,7 +97,7 @@ export default class ChatPage extends Component {
                         {
                             messageList.map((val) => {
                                 return (
-                                    <div key={val._id} className="messageContainer" id={val.sender.name == me.name ? "You" : "Other"}>
+                                    <div key={val._id} className="messageContainer" id={val.sender.username == this.state.me.username ? "You" : "Other"}>
                                         <div className="messageIndividual">
                                             {val.sender.name}: {val.message}
                                         </div>

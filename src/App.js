@@ -1,4 +1,4 @@
-import { Switch, Route, withRouter, Link } from "react-router-dom";
+import { Switch, Route, withRouter} from "react-router-dom";
 import React, { Component } from 'react'
 import axios from 'axios'
 import { API_URL } from './config'
@@ -103,6 +103,10 @@ class App extends Component {
     }
   }
 
+  handleLogOut = async() => {
+  await axios.post(`${API_URL}/logout`, {}, {withCredentials: true})
+        this.setState({ user: null } , () => {this.props.history.push('/')})
+  }
 
   /////////////////// RENDER ///////////////////
   render() {
