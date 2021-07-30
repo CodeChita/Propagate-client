@@ -25,10 +25,9 @@ export default class SinglePlantCard extends Component {
                             style={{ height: '25vw', width: '25vw', maxHeight: '100px', maxWidth: '100px' }} />
 
                         <div style={{ paddingLeft: '5px', width: '50vw', height: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                            <Typography variant="h5">{displayName}</Typography>
+                            <Typography nowrap variant="h6">{displayName}</Typography>
                             <Typography variant="subtitle1">{scientificName}</Typography>
                             <Typography variant="subtitle2">{city}</Typography>
-                            <p>{`${this.props.plant.city} ${displayName}`}</p>
                         </div>
                         <div style={{ height: 'auto', width: '25vw', maxWidth: '100px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                             <IconButton onClick={this.props.onChatClick}><Forum/> </IconButton>

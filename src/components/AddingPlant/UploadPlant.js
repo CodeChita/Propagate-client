@@ -19,17 +19,17 @@ export default function ImageUpload(props) {
                         type="file"
                     />
                     <Button color="secondary" variant="contained" component="span">
-                        Upload button
+                        Choose Image
                     </Button>
                 </label>
 
-                <Select name='organ'>
+                <Select name='organ' style={{margin: '20px'}}>
                     <MenuItem value="leaf">Leaf</MenuItem>
                     <MenuItem value="flower">Flower</MenuItem>
                     <MenuItem value="fruit">Fruit</MenuItem>
                     <MenuItem value="bark">bark</MenuItem>
                 </Select>
-                 <Button type="submit" color="primary" variant="contained" className="btn btn-primary" style={{ margin: '5px' }}>Submit</Button>
+                 <Button type="submit" color="primary" variant="contained" className="btn btn-primary" style={{ margin: '20px' }}>Submit</Button>
             </form>
         </div>
     )

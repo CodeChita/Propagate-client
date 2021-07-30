@@ -116,7 +116,7 @@ class App extends Component {
 
     return (
       <>
-        <img src="/images/propagate-med.svg" alt="propagate app" />
+        <img src="/images/propagate-med.svg" alt="propagate app" style={{paddingLeft: '10vw', paddingRight: '10vw', width: '80vw'}}/>
         <Switch>
           <Route exact path={'/'} render={(routeProps) => {
             return (

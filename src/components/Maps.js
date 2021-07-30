@@ -31,8 +31,8 @@ function MyMap() {
 	  
 
 	const ironhackLogo = new L.Icon({
-		iconUrl: '../logo192.png',
-		iconSize: [38, 35],
+		iconUrl: './images/prop-logo-white-192.png',
+		iconSize: [40, 40],
 	});
 
 	const [allPlants, setPlants] = useState([])
@@ -84,13 +84,14 @@ function MyMap() {
 					name='city' variant="outlined" autoComplete="false" autoFocus fullWidth
 				/>
 				<Button variant="contained" 
-                            color="#1f998a" 
+                            color="secondary" 
                             size="large" 
+							style={{margin: "10px"}}
 							type='submit'>Submit</Button>
 			</form>
 			<MapContainer
-				style={{ width: '500px', height: '500px', display: 'flex',  justifyContent: 'center', alignItems: 'center', padding: '5px', margin: '5px' }}
-				center={position} zoom={12}
+				style={{ width: '100vw', height: '120vw', display: 'flex',  justifyContent: 'center', alignItems: 'center' }}
+				center={position} zoom={11}
 				scrollWheelZoom={true}
 			>
 
@@ -102,7 +103,7 @@ function MyMap() {
 				{
 					allPlants.map((plant, i) => {
 						return (
-							<Marker position={plant.geoLocation} icon={ ironhackLogo }>
+							<Marker key={i} position={plant.geoLocation} icon={ ironhackLogo }>
 								<Popup>
 								<Link to={{pathname: `/users/${plant.user._id}`, state:{plant: plant._id}}}>{plant.displayName}</Link> 
 									<br /> 

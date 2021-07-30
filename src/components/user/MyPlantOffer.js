@@ -42,14 +42,14 @@ export default class MyPlantOffer extends Component{
                     display : 'flex', 
                     flexDirection : 'row', 
                     alignContent: 'center', 
-                    justifyContent : 'space-between'
+                    justifyContent: 'spaceBetween'
                     }}>
 
             <img src={plantImageUrl} alt={scientificName}
                  style={{height: '100px', width : '100px' }} />
 
-            <div style={{height : 'auto', display : 'flex', flexDirection : 'column', justifyContent : 'center'}}>
-            <Typography variant="h4">{displayName}</Typography>
+            <div style={{width: '50vw', height : '90px', display : 'flex', flexDirection : 'column', justifyContent : 'center', padding: '5px'}}>
+            <Typography variant="h6">{displayName}</Typography>
             <Typography variant="subtitle1">{scientificName}</Typography>
             </div>
             <div style={{height : 'auto', display : 'flex', flexDirection : 'column', justifyContent : 'space-between'}}>
